@@ -829,7 +829,8 @@
         </div>
 
         <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
-          <button class="btn" onclick="saveActiveVehicle(); switchTab(2);">Kaydet ve Şanzıman Teşhisine Geç ➔</button>
+          <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Aracı Kaydet</button>
+          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(2);">İlerle ➔</button>
         </div>
       </div>
     </section>
@@ -915,7 +916,8 @@
 
         <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 22px;">
           <button class="btn btn-secondary" onclick="switchTab(1);">⬅ 1. Araç Girişi</button>
-          <button class="btn" onclick="saveActiveVehicle(); switchTab(3);">Kaydet ve Parça Listesine Geç ➔</button>
+          <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Değişiklikleri Kaydet</button>
+          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(3);">İlerle ➔</button>
         </div>
       </div>
     </section>
@@ -1131,7 +1133,7 @@
         km: '184500',
         entryDate: '2026-09-18',
         engineType: '1.6 TDI Dizel 120 HP',
-        complaint: 'Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites 2'den 3'e geçerken boşa atıyor, devir yükseliyor ve ekranda anahtar işareti çıkıyor.',
+        complaint: 'Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites 2\'den 3\'e geçerken boşa atıyor, devir yükseliyor ve ekranda anahtar işareti çıkıyor.',
         transType: 'DSG DQ200 7-İleri Kuru Çift Kavrama (0CW)',
         faultCodes: 'P17BF (Hidrolik Pompa Basınç Düşüklüğü), P0841 (Şanzıman Basınç Sensörü 1 Sinyal Hatası)',
         expertiseNotes: 'Mekatronik alt gövdesinde basınç tüpü yuvasında mikro çatlak tespit edildi. Hidrolik basınç 40 bar altına düşüyor ve pompa sürekli devrede kalıyor. Çift kavrama balata kiti aşınmış, 1. kavrama kalınlığı sınırda.',
@@ -1501,9 +1503,9 @@
       }
 
       updateHeaderBadges();
-      alert('🎙️ Ses Algılandı:
-"' + spokenText + '"
-Form alanlarına dağıtıldı.');
+      alert('🎙️ Ses Algılandı: ' + spokenText);
+
+
     }
 
     // -------------------------------------------------------------
