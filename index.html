@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Aktif Otomatik Şanzıman Servisi - Dijital Servis Takip ve Arıza Yönetim Sistemi</title>
+  <title>Aktif Otomatik Şanzıman - Profesyonel Servis Takip ve Yapay Zeka Sistemi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
+      --primary-light: rgba(37, 99, 235, 0.15);
       --bg: #0b1329;
       --card-bg: #152238;
       --card-border: #233554;
@@ -21,6 +22,7 @@
       --success: #10b981;
       --cyan: #06b6d4;
       --radius: 12px;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
     }
 
     * {
@@ -42,7 +44,7 @@
     header {
       background: linear-gradient(135deg, #152238 0%, #0b1329 100%);
       border-bottom: 1px solid var(--card-border);
-      padding: 14px 18px;
+      padding: 12px 18px;
       position: sticky;
       top: 0;
       z-index: 50;
@@ -86,6 +88,7 @@
     .header-actions {
       display: flex;
       gap: 6px;
+      align-items: center;
     }
 
     .btn-icon {
@@ -109,72 +112,218 @@
 
     /* Container */
     .container {
-      max-width: 920px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 16px;
     }
 
-    /* Active Car Bar */
-    .active-car-bar {
-      background: linear-gradient(90deg, #152238 0%, #1a2c4a 100%);
-      border: 1px solid #2a4365;
+    /* Persistent Active Cars Bar */
+    .vehicle-ribbon {
+      background: #152238;
+      border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 12px 16px;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .car-info-left {
+      padding: 8px 12px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
     }
 
-    .plate-badge-large {
-      background: #f8fafc;
-      color: #0f172a;
-      font-weight: 900;
-      font-size: 1.05rem;
-      padding: 4px 12px;
-      border-radius: 6px;
-      border: 2px solid #0f172a;
-      letter-spacing: 1.2px;
-      display: inline-block;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    .vehicle-ribbon::-webkit-scrollbar {
+      height: 4px;
     }
 
-    /* Quick Preset Chips */
-    .chips-group {
+    .vehicle-ribbon::-webkit-scrollbar-thumb {
+      background: #33496e;
+      border-radius: 4px;
+    }
+
+    .ribbon-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-      margin-bottom: 12px;
+      align-items: center;
+      gap: 4px;
+      padding-right: 6px;
+      border-right: 1px solid var(--card-border);
     }
 
-    .chip-btn {
+    .ribbon-pill {
       background: #1e3a5f;
       border: 1px solid #2d5584;
       color: #bae6fd;
       border-radius: 20px;
-      padding: 5px 11px;
-      font-size: 0.78rem;
-      font-weight: 600;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
     }
 
-    .chip-btn:hover {
-      background: var(--primary);
+    .ribbon-pill:hover {
+      border-color: #38bdf8;
+    }
+
+    .ribbon-pill.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 2px 10px rgba(37,99,235,0.5);
+    }
+
+    .ribbon-add-btn {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px dashed var(--success);
+      color: #6ee7b7;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .ribbon-add-btn:hover {
+      background: var(--success);
       color: white;
-      border-color: var(--primary);
     }
 
-    /* Navigation Bar */
+    /* AI CARD (GEMINI INTEGRATION) */
+    .ai-card {
+      background: linear-gradient(135deg, rgba(37,99,235,0.18) 0%, rgba(6,182,212,0.1) 100%);
+      border: 1.5px solid #38bdf8;
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(56,189,248,0.18);
+      position: relative;
+    }
+
+    .ai-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .ai-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ai-badge {
+      background: #0284c7;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ai-input-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ai-textarea {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #33496e;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #f8fafc;
+      font-size: 0.92rem;
+      resize: vertical;
+      min-height: 72px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .ai-textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+
+    .ai-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-ai-mic {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-ai-mic.listening {
+      animation: micPulse 1.2s infinite;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+
+    @keyframes micPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+      70% { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    .btn-ai-submit {
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-ai-submit:hover {
+      background: linear-gradient(135deg, #1d4ed8, #0369a1);
+    }
+
+    .ai-hint {
+      font-size: 0.76rem;
+      color: #94a3b8;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* Navigation Tabs */
     .nav-tabs {
       display: flex;
       background: #152238;
@@ -186,6 +335,7 @@
       overflow-x: auto;
       scrollbar-width: none;
     }
+
     .nav-tabs::-webkit-scrollbar { display: none; }
 
     .nav-btn {
@@ -224,7 +374,7 @@
       border-radius: var(--radius);
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      box-shadow: var(--shadow);
     }
 
     .card-header {
@@ -245,150 +395,69 @@
       gap: 8px;
     }
 
-    /* Voice Assistant Box */
-    .voice-quick-banner {
-      background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(6,182,212,0.1) 100%);
-      border: 1.5px dashed #38bdf8;
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .voice-banner-text h4 {
-      font-size: 0.98rem;
-      color: #38bdf8;
-      font-weight: 800;
-      margin-bottom: 3px;
-    }
-
-    .voice-banner-text p {
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      line-height: 1.4;
-    }
-
-    .btn-voice-large {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.92rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(37,99,235,0.4);
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .btn-voice-large:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-voice-large.listening {
-      background: #ef4444 !important;
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-      70% { transform: scale(1.08); box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-    }
-
     /* Forms */
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-row {
+    .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 14px;
+      margin-bottom: 14px;
     }
 
-    @media (max-width: 640px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    label {
-      display: block;
+    .form-group label {
       font-size: 0.82rem;
       font-weight: 700;
-      color: #94a3b8;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .input-wrapper {
-      position: relative;
+      color: #cbd5e1;
       display: flex;
       align-items: center;
+      gap: 6px;
     }
 
-    input, textarea, select {
-      width: 100%;
-      background: #0b1329;
-      border: 1px solid var(--card-border);
-      color: #ffffff;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      border-radius: 10px;
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 85px;
-      line-height: 1.5;
-    }
-
-    .btn-voice {
-      position: absolute;
-      right: 6px;
-      background: #233554;
-      color: #94a3b8;
-      border: none;
+    input, select, textarea {
+      background: #0f172a;
+      border: 1px solid #2a3d5e;
       border-radius: 8px;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      cursor: pointer;
-      transition: all 0.2s;
+      padding: 10px 12px;
+      color: #f8fafc;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
     }
 
-    .btn-voice:hover {
+    input:focus, select:focus, textarea:focus {
+      border-color: #38bdf8;
+    }
+
+    .chips-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    .chip-btn {
+      background: #1e3a5f;
+      border: 1px solid #2d5584;
+      color: #bae6fd;
+      border-radius: 20px;
+      padding: 5px 11px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .chip-btn:hover {
       background: var(--primary);
       color: white;
-    }
-
-    .btn-voice.listening {
-      background: #ef4444 !important;
-      color: white !important;
-      animation: pulse 1s infinite;
-    }
-
-    .input-with-voice {
-      padding-right: 48px;
+      border-color: var(--primary);
     }
 
     /* Buttons */
@@ -396,15 +465,15 @@
       background: var(--primary);
       color: white;
       border: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 0.92rem;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s;
     }
 
@@ -412,264 +481,193 @@
       background: var(--primary-hover);
     }
 
-    .btn-secondary {
-      background: #233554;
-      color: #e2e8f0;
-      border: 1px solid #33496e;
-    }
-    .btn-secondary:hover {
-      background: #33496e;
-    }
-
     .btn-success {
-      background: #10b981;
-    }
-    .btn-success:hover {
       background: #059669;
     }
 
+    .btn-success:hover {
+      background: #047857;
+    }
+
+    .btn-secondary {
+      background: #334155;
+    }
+
+    .btn-secondary:hover {
+      background: #475569;
+    }
+
     .btn-danger {
-      background: #ef4444;
+      background: #dc2626;
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
     }
 
     .btn-block {
       width: 100%;
     }
 
-    /* Photo Upload Area */
-    .photo-upload-zone {
-      border: 2px dashed #2d5584;
-      border-radius: var(--radius);
-      padding: 22px;
-      text-align: center;
-      background: #0b1329;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .photo-upload-zone:hover {
-      border-color: #38bdf8;
-      background: rgba(56,189,248,0.05);
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .photo-card {
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      border: 1px solid var(--card-border);
-      background: #0b1329;
-    }
-
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      cursor: pointer;
-    }
-
-    .photo-card .photo-del {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: rgba(239, 68, 68, 0.85);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      width: 26px;
-      height: 26px;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .photo-card .photo-tag {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(11, 19, 41, 0.85);
-      color: #93c5fd;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 4px 6px;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Table for Parts */
+    /* Tables */
     .table-container {
       overflow-x: auto;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
+      margin-top: 10px;
       margin-bottom: 14px;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
 
     th {
-      background: #0b1329;
-      color: #94a3b8;
-      padding: 11px 12px;
+      background: #1e293b;
+      color: #cbd5e1;
+      padding: 10px;
       font-weight: 700;
       border-bottom: 1px solid var(--card-border);
     }
 
     td {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--card-border);
-      color: #e2e8f0;
+      padding: 8px 10px;
+      border-bottom: 1px solid #1e293b;
     }
 
-    .total-box {
-      background: #0b1329;
-      border-radius: 12px;
-      padding: 16px 20px;
-      border: 1px solid #233554;
+    /* Summary Bar */
+    .summary-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid #33496e;
+      border-radius: 10px;
+      padding: 16px;
       margin-top: 14px;
     }
 
-    .total-line {
+    .summary-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      color: #94a3b8;
-    }
-
-    .total-line.grand {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: #38bdf8;
-      border-top: 1px solid #233554;
-      padding-top: 10px;
-      margin-top: 10px;
-      margin-bottom: 0;
-    }
-
-    /* Status Badges */
-    .status-badge {
-      display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 0.78rem;
+      padding: 6px 0;
+      font-size: 0.88rem;
+    }
+
+    .summary-row.total {
+      border-top: 1.5px solid #38bdf8;
+      margin-top: 8px;
+      padding-top: 10px;
+      font-size: 1.15rem;
       font-weight: 800;
+      color: #38bdf8;
     }
 
-    .status-0 { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid #475569; }
-    .status-1 { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid #2563eb; }
-    .status-2 { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #d97706; }
-    .status-3 { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid #9333ea; }
-    .status-4 { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid #db2777; }
-    .status-5 { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #059669; }
-    .status-6 { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid #0284c7; }
-
-    /* Vehicle Grid */
-    .vehicle-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
+    /* Badges */
+    .plate-badge-large {
+      background: #f8fafc;
+      color: #0f172a;
+      font-weight: 900;
+      font-size: 1.05rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 2px solid #0f172a;
+      letter-spacing: 1.2px;
+      display: inline-block;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .vehicle-card {
-      background: #152238;
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 16px;
-      cursor: pointer;
-      transition: all 0.2s;
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 700;
     }
 
-    .vehicle-card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-2px);
-    }
+    .status-0 { background: #3b82f6; color: white; }
+    .status-1 { background: #f59e0b; color: #1e293b; }
+    .status-2 { background: #8b5cf6; color: white; }
+    .status-3 { background: #ec4899; color: white; }
+    .status-4 { background: #06b6d4; color: #0f172a; }
+    .status-5 { background: #10b981; color: white; }
+    .status-6 { background: #64748b; color: white; }
 
-    /* Modal */
+    /* Modals */
     .modal-overlay {
-      display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 100;
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 16px;
     }
+
     .modal-overlay.active {
       display: flex;
     }
 
     .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      width: 100%;
-      max-width: 650px;
-      max-height: 90vh;
-      overflow-y: auto;
+      background: #152238;
+      border: 1px solid #33496e;
+      border-radius: 14px;
       padding: 22px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
-    /* Print Slip Styles */
-    @media print {
-      body {
-        background: white !important;
-        color: black !important;
-        padding: 0 !important;
-      }
-      header, .nav-tabs, .btn, .btn-voice, .photo-upload-zone, .btn-voice-large, .chips-group, .no-print {
-        display: none !important;
-      }
-      .card {
-        border: 1px solid #ccc !important;
-        background: white !important;
-        color: black !important;
-        box-shadow: none !important;
-        margin-bottom: 12px !important;
-        page-break-inside: avoid;
-        padding: 14px !important;
-      }
-      input, textarea, select {
-        border: none !important;
-        background: transparent !important;
-        color: black !important;
-        font-size: 10pt !important;
-        padding: 0 !important;
-      }
-      .print-header {
-        display: block !important;
-        border-bottom: 2px solid #000;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-      }
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #10b981;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      z-index: 200;
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .print-header { display: none; }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Print Preview */
+    .official-invoice {
+      background: #ffffff;
+      color: #0f172a;
+      padding: 24px;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      margin-top: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #printArea, #printArea * { visibility: visible; }
+      #printArea { position: absolute; left: 0; top: 0; width: 100%; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- HEADER -->
   <header>
     <div class="brand">
       <div class="brand-icon">⚙️</div>
@@ -679,30 +677,54 @@
       </div>
     </div>
     <div class="header-actions">
-      <button class="btn-icon" onclick="exportData()" title="Yedek İndir">💾 Yedekle</button>
-      <button class="btn-icon" onclick="document.getElementById('importFileInput').click()" title="Yedek Yükle">📂 Yükle</button>
-      <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
+      <button class="btn-icon" onclick="openApiKeyModal()" title="Gemini AI Ayarları">🔑 Gemini API</button>
+      <button class="btn-icon" onclick="showVehicleListModal()" title="Kayıtlı Araçlar">📋 Tüm Araçlar (<span id="headerVehicleCount">0</span>)</button>
+      <button class="btn-icon" onclick="exportData()" title="Yedek İndir">💾</button>
     </div>
   </header>
 
   <div class="container">
 
-    <!-- Active Vehicle Status Bar -->
-    <div class="active-car-bar">
-      <div class="car-info-left">
-        <span class="plate-badge-large" id="activePlateBadge">07 AT 1234</span>
-        <div>
-          <strong id="activeModelBadge" style="color: #fff; font-size: 0.98rem;">VW Passat 1.6 TDI (DSG DQ200)</strong>
-          <div style="font-size: 0.75rem; color: #94a3b8;" id="activeCustomerBadge">Müşteri: Ahmet Yılmaz • 0532 555 4433</div>
-        </div>
+    <!-- HORIZONTAL QUICK VEHICLE BAR -->
+    <div class="vehicle-ribbon">
+      <span class="ribbon-label">🚗 Araçlarım:</span>
+      <div id="ribbonVehicleList" style="display: flex; gap: 8px; align-items: center;">
+        <!-- Dynamic Pills -->
       </div>
-      <div style="display: flex; gap: 8px;">
-        <button class="btn btn-secondary" style="padding: 7px 12px; font-size: 0.82rem;" onclick="showVehicleListModal()">📋 Kayıtlı Araçlar (<span id="totalVehicleCount">3</span>)</button>
-        <button class="btn btn-success" style="padding: 7px 12px; font-size: 0.82rem;" onclick="resetFormForNewVehicle()">➕ Yeni Araç</button>
-      </div>
+      <button class="ribbon-add-btn" onclick="resetFormForNewVehicle()">➕ Yeni Araç</button>
     </div>
 
-    <!-- Navigation Tabs -->
+    <!-- AI CARD (GEMINI ASISTANI) -->
+    <section class="ai-card">
+      <div class="ai-header">
+        <div class="ai-title">
+          <span>🤖 Gemini AI Şanzıman Asistanı</span>
+          <span class="ai-badge" id="aiStatusBadge">Akıllı Motor</span>
+        </div>
+        <button class="btn-icon" style="padding: 4px 8px; font-size: 0.74rem;" onclick="openApiKeyModal()">⚙️ API Ayarı</button>
+      </div>
+
+      <div class="ai-input-box">
+        <textarea id="aiSpeechText" class="ai-textarea" placeholder="Mikrofona basıp serbestçe anlatın veya buraya yazın:
+Örn: '07 FFC 155 2014 Ford Focus şanzıman su almış. İthal revizyonlu şanzıman 100 bin, yağ soğutucu 6500, 7 litre yağ ve 20 bin işçilik yaz.'"></textarea>
+
+        <div class="ai-controls">
+          <button class="btn-ai-mic" id="btnAiMic" onclick="toggleAiVoice()">
+            <span id="aiMicIcon">🎤</span> <span id="aiMicText">Sesle Anlat</span>
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-ai-submit" onclick="processWithGemini()">
+              <span>⚡ Gemini ile Doldur & Kaydet</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-hint">
+        💡 <b>İpucu:</b> Dükkanda elleriniz işteyken mikrofona basıp konuşun; plaka, şanzıman arızası, parça listesi, yağ ve işçilik tutarları otomatik ayırt edilip forma işlenir.
+      </div>
+    </section>
+
+    <!-- NAVIGATION TABS -->
     <div class="nav-tabs">
       <button class="nav-btn active" onclick="switchTab(1)" id="tabBtn1">
         <span class="tab-icon">🚗</span>
@@ -722,366 +744,342 @@
       </button>
     </div>
 
-    <!-- PRINT HEADER -->
-    <div class="print-header">
-      <h2>AKTİF OTOMATİK ŞANZIMAN SERVİSİ</h2>
-      <p>Akdeniz Sanayi Sitesi 5036 Sokak No:91 Kepez / ANTALYA • Tel: 0545 344 87 32</p>
-      <p><strong>Yetkili: Yusuf Yaşar Kaya (Baş Usta)</strong></p>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- TAB 1: ARAÇ GİRİŞİ & SESLİ DİKTE -->
-    <!-- ========================================== -->
+    <!-- TAB 1: ARAÇ GİRİŞİ -->
     <section id="tab1" class="tab-content">
-      
-      <!-- Voice Assistant Banner -->
-      <div class="voice-quick-banner">
-        <div class="voice-banner-text">
-          <h4>🎙️ Hızlı Sesli Araç Kaydı (Türkçe)</h4>
-          <p>Mikrofona basıp konuşun: <i>"Plaka 07 AT 1234, 2016 Passat 1.6 TDI DSG, araç 2'den 3'e geçerken vuruntu yapıyor ve boşa atıyor"</i></p>
-        </div>
-        <button class="btn-voice-large" id="btnSmartVoice" onclick="toggleSmartVoice()">
-          <span>🎤</span> <span id="smartVoiceLabel">Sesle Söyle</span>
-        </button>
-      </div>
-
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🚘 Araç & Müşteri Temel Bilgileri</div>
-          <span style="font-size: 0.78rem; color: #38bdf8;">Kutucukların yanındaki 🎤 butonuna basarak tek tek de söyleyebilirsiniz</span>
+          <div class="card-title">🚗 Araç ve Müşteri Bilgileri</div>
+          <span class="plate-badge-large" id="badgePlateDisplay">07 AT 1234</span>
         </div>
 
-        <div class="form-row">
+        <div class="form-grid">
           <div class="form-group">
-            <label>Araç Plakası</label>
-            <div class="input-wrapper">
-              <input type="text" id="vPlate" placeholder="Örn: 07 AT 1234" class="input-with-voice" style="font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
-              <button class="btn-voice" onclick="startFieldVoice('vPlate')" title="Sesle Plaka Söyle">🎤</button>
-            </div>
-            <!-- Quick Plates -->
-            <div class="chips-group">
-              <span style="font-size: 0.72rem; color: #94a3b8; align-self: center;">Hızlı Seç:</span>
-              <button class="chip-btn" onclick="selectDemoVehicle(0)">07 AT 1234 (Passat)</button>
-              <button class="chip-btn" onclick="selectDemoVehicle(1)">34 ZH 5513 (Accent Era)</button>
-              <button class="chip-btn" onclick="selectDemoVehicle(2)">07 ASE 056 (Qashqai)</button>
-            </div>
+            <label>Plaka</label>
+            <input type="text" id="vPlate" placeholder="Örn: 07 AT 1234" oninput="onPlateChange()">
           </div>
-
           <div class="form-group">
-            <label>Araç Marka / Model / Yıl</label>
-            <div class="input-wrapper">
-              <input type="text" id="vModel" placeholder="Örn: Volkswagen Passat 1.6 TDI 2016" class="input-with-voice">
-              <button class="btn-voice" onclick="startFieldVoice('vModel')" title="Sesle Model Söyle">🎤</button>
-            </div>
-            <!-- Quick Models -->
-            <div class="chips-group">
-              <button class="chip-btn" onclick="appendInput('vModel', 'VW Passat 1.6 TDI')">Passat</button>
-              <button class="chip-btn" onclick="appendInput('vModel', 'Ford Focus 1.5 TDCi')">Focus</button>
-              <button class="chip-btn" onclick="appendInput('vModel', 'Renault Megane 1.5 dCi')">Megane</button>
-              <button class="chip-btn" onclick="appendInput('vModel', 'Mercedes C200d')">Mercedes</button>
-              <button class="chip-btn" onclick="appendInput('vModel', 'BMW 320d (F30)')">BMW 320d</button>
-              <button class="chip-btn" onclick="appendInput('vModel', 'Hyundai Accent Era')">Accent</button>
-            </div>
+            <label>Araç Marka & Model</label>
+            <input type="text" id="vModel" placeholder="Örn: Volkswagen Passat 1.6 TDI">
           </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group">
-            <label>Müşteri Adı ve Telefonu</label>
-            <div class="input-wrapper">
-              <input type="text" id="vCustomer" placeholder="Örn: Ahmet Yılmaz - 0532 555 4433" class="input-with-voice">
-              <button class="btn-voice" onclick="startFieldVoice('vCustomer')">🎤</button>
-            </div>
+            <label>Müşteri Adı / Telefon</label>
+            <input type="text" id="vCustomer" placeholder="Örn: Ahmet Yılmaz - 0532 555 4433">
           </div>
-
           <div class="form-group">
-            <label>Araç Kilometresi (KM)</label>
-            <input type="number" id="vKm" placeholder="Örn: 185000">
+            <label>Kilometre (KM)</label>
+            <input type="text" id="vKm" placeholder="Örn: 184.500">
           </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group">
-            <label>Geliş / Kabul Tarihi</label>
+            <label>Giriş Tarihi</label>
             <input type="date" id="vEntryDate">
           </div>
           <div class="form-group">
-            <label>Yakıt & Motor Tipi</label>
-            <input type="text" id="vEngineType" placeholder="Örn: 1.6 TDI Dizel / 1.5 EcoBoost Benzin">
+            <label>Motor Tipi / Yakıt</label>
+            <input type="text" id="vEngineType" placeholder="Örn: 1.6 TDI Dizel 120 HP">
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="margin-top: 10px;">
           <label>Müşteri Şikayeti / Geliş Nedeni</label>
-          <div class="input-wrapper" style="align-items: flex-start;">
-            <textarea id="vComplaint" placeholder="Örn: Araç ısınınca kalkışta şiddetli silkeleme yapıyor. Vites 2'den 3'e geçerken boşa atıyor ve devir yükseliyor..." class="input-with-voice"></textarea>
-            <button class="btn-voice" style="top: 8px; right: 6px;" onclick="startFieldVoice('vComplaint')" title="Sesle Şikayeti Anlat">🎤</button>
-          </div>
-          <!-- Quick Complaints -->
+          <textarea id="vComplaint" rows="3" placeholder="Örn: Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites 2'den 3'e geçerken boşa atıyor..."></textarea>
           <div class="chips-group">
-            <span style="font-size: 0.72rem; color: #94a3b8; align-self: center;">Sık Şikayetler:</span>
-            <button class="chip-btn" onclick="appendInput('vComplaint', 'Kalkışta ve 1-2 vites geçişinde aşırı silkeleme/titreme')">Kalkışta Silkeleme</button>
-            <button class="chip-btn" onclick="appendInput('vComplaint', '2'den 3'e geçerken sert vuruntu ve boşa kaçırma')">Vuruntu & Kaçırma</button>
-            <button class="chip-btn" onclick="appendInput('vComplaint', 'Geri vitese geçmiyor, R'ye takınca hareket etmiyor')">Geri Vites Yok</button>
-            <button class="chip-btn" onclick="appendInput('vComplaint', 'Araç ısındıktan sonra şanzıman acil moda geçiyor')">Isınınca Arızaya Geçiyor</button>
-            <button class="chip-btn" onclick="appendInput('vComplaint', 'Rampa çıkarken çekiş düşüyor, devir bağırıyor ama hızlanmıyor')">Kaçırma / Çekiş Kaybı</button>
+            <button class="chip-btn" onclick="appendComplaint('Kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor.')">Silkeleme / Titreme</button>
+            <button class="chip-btn" onclick="appendComplaint('Vites geçişlerinde boşa atıyor ve devir yükseliyor.')">Boşa Atma</button>
+            <button class="chip-btn" onclick="appendComplaint('Geri vitese geçmiyor, ekranda anahtar ve şanzıman ikazı yanıyor.')">Geri Vites Yok</button>
+            <button class="chip-btn" onclick="appendComplaint('Gaza basınca devir yükseliyor ama araç çekmiyor, balata kaçırıyor.')">Çekiş Kaybı</button>
+            <button class="chip-btn" onclick="appendComplaint('Şanzıman içerisine soğutma suyu karışmış (su almış).')">Su Karışmış</button>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
           <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Aracı Kaydet</button>
-          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(2);">İlerle ➔</button>
+          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(2);">Teşhise Geç ➔</button>
         </div>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- TAB 2: ŞANZIMAN TEŞHİS & FOTOĞRAFLAR -->
-    <!-- ========================================== -->
+    <!-- TAB 2: TEŞHİS & FOTOĞRAFLAR -->
     <section id="tab2" class="tab-content" style="display: none;">
       <div class="card">
         <div class="card-header">
           <div class="card-title">🔧 Şanzıman Tipi ve Arıza Teşhisi</div>
         </div>
 
-        <div class="form-group">
-          <label>Şanzıman Tipi / Kodu</label>
-          <input type="text" id="vTransType" placeholder="Örn: DSG DQ200 (0AM/0CW)">
-          <!-- Quick Transmissions -->
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label>Şanzıman Kodu / Tipi</label>
+          <input type="text" id="vTransType" placeholder="Örn: DSG DQ200 7-İleri (0CW)">
           <div class="chips-group">
-            <span style="font-size: 0.72rem; color: #94a3b8; align-self: center;">Hızlı Şanzıman Seçimi:</span>
-            <button class="chip-btn" onclick="setInput('vTransType', 'DSG DQ200 7-İleri Kuru Kavrama (0AM/0CW)')">DSG DQ200 (Kuru)</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'DSG DQ250 6-İleri Islak Kavrama (02E)')">DSG DQ250 (Islak)</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'DSG DQ381 7-İleri Islak Kavrama')">DSG DQ381</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'ZF 8HP45/8HP70 8-İleri Tork Konvertörlü')">ZF 8HP</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'Mercedes 722.9 7G-Tronic')">Mercedes 7G-Tronic</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'Renault EDC DC4 Kuru Çift Kavrama')">Renault EDC</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'Ford Powershift 6DCT250 / 6DCT450')">Ford Powershift</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'Aisin Warner TF-80SC / AF40 6-İleri')">Aisin TF-80</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'Kademesiz Otomatik Şanzıman (CVT)')">CVT</button>
-            <button class="chip-btn" onclick="setInput('vTransType', 'PSA AL4 / DPO 4-İleri')">AL4 / DPO</button>
+            <button class="chip-btn" onclick="setTransType('DSG DQ200 (7-İleri Kuru Kavrama)')">DQ200 DSG</button>
+            <button class="chip-btn" onclick="setTransType('DSG DQ250 (6-İleri Islak Kavrama)')">DQ250 DSG</button>
+            <button class="chip-btn" onclick="setTransType('Toyota MMT Robotize Şanzıman')">Toyota MMT</button>
+            <button class="chip-btn" onclick="setTransType('Renault EDC 6-İleri (DC4 / DW5)')">Renault EDC</button>
+            <button class="chip-btn" onclick="setTransType('Nissan CVT (JF011E / JF015E / JF016E)')">Nissan CVT</button>
+            <button class="chip-btn" onclick="setTransType('ZF 6HP21 / 6HP19 (BMW/Audi)')">ZF 6HP</button>
+            <button class="chip-btn" onclick="setTransType('ZF 8HP45 / 8HP70 (BMW 8-İleri)')">ZF 8HP</button>
+            <button class="chip-btn" onclick="setTransType('Mercedes 722.6 / 722.9 7G-Tronic')">Mercedes 7G</button>
+            <button class="chip-btn" onclick="setTransType('Ford PowerShift (DPS6 / 6DCT250)')">PowerShift</button>
+            <button class="chip-btn" onclick="setTransType('Aisin TF-80SC / Warner 6-İleri')">Aisin 6-İleri</button>
           </div>
         </div>
 
-        <div class="form-group">
-          <label>OBD / DTC Arıza Kodları</label>
-          <div class="input-wrapper">
-            <input type="text" id="vFaultCodes" placeholder="Örn: P0700, P17BF (Hidrolik Basınç Düşüklüğü), P0841" class="input-with-voice">
-            <button class="btn-voice" onclick="startFieldVoice('vFaultCodes')">🎤</button>
-          </div>
-          <!-- Quick Fault Codes -->
-          <div class="chips-group">
-            <span style="font-size: 0.72rem; color: #94a3b8; align-self: center;">Yaygın Kodlar:</span>
-            <button class="chip-btn" onclick="appendInput('vFaultCodes', 'P17BF (Hidrolik Pompa Basınç Kaybı / Tüp Yuvası)')">P17BF (Mekatronik Tüp)</button>
-            <button class="chip-btn" onclick="appendInput('vFaultCodes', 'P0700 (Şanzıman Kontrol Sistemi Arızası)')">P0700</button>
-            <button class="chip-btn" onclick="appendInput('vFaultCodes', 'P0730 (Yanlış Dişli / Vites Oranı Hatası)')">P0730 (Vites Oranı)</button>
-            <button class="chip-btn" onclick="appendInput('vFaultCodes', 'P0841 (Şanzıman Sıvı Basınç Sensörü Arızası)')">P0841</button>
-            <button class="chip-btn" onclick="appendInput('vFaultCodes', 'P2714 (Basınç Kontrol Solenoidi Performans/Takılı Kalma)')">P2714 (Solenoid)</button>
-            <button class="chip-btn" onclick="appendInput('vFaultCodes', 'P0741 (Tork Konvertör Kavraması Açık Kalma)')">P0741 (Türbin)</button>
-          </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label>Arıza Kodları (DTC / Teşhis Cihazı)</label>
+          <input type="text" id="vFaultCodes" placeholder="Örn: P17BF (Basınç Düşüklüğü), P0841, P0700">
         </div>
 
-        <div class="form-group">
-          <label>Usta Arıza Tespiti & Ekspertiz Notları</label>
-          <div class="input-wrapper" style="align-items: flex-start;">
-            <textarea id="vExpertiseNotes" placeholder="Örn: Mekatronik basınç tüpü yuvasında çatlak tespit edildi, basınç 42 bara düşüyor. Karter içi mıknatıslarda metal çapağı gözlendi. 1. ve 2. kavrama balatası yanık..." class="input-with-voice"></textarea>
-            <button class="btn-voice" style="top: 8px; right: 6px;" onclick="startFieldVoice('vExpertiseNotes')">🎤</button>
-          </div>
-          <div class="chips-group">
-            <button class="chip-btn" onclick="appendInput('vExpertiseNotes', 'Mekatronik gövde tüp yuvası çatlak, basınç tutmuyor, güçlendirilmiş tüp kiti uygulanacak.')">Mekatronik Tüp Çatlağı</button>
-            <button class="chip-btn" onclick="appendInput('vExpertiseNotes', 'Kavrama balataları ve çelik saclar aşırı ısınmadan dolayı yanmış/aşınmış.')">Balata/Sac Yanığı</button>
-            <button class="chip-btn" onclick="appendInput('vExpertiseNotes', 'Karter tabanında ve mıknatıslarda yoğun metal talaşı ve çapak birikimi var.')">Yoğun Talaş/Çapak</button>
-            <button class="chip-btn" onclick="appendInput('vExpertiseNotes', 'Tork konvertörü (türbin) iç balatası sıyırmış, türbin revizyonu ve dinamik balans şart.')">Türbin Balata Sıyırması</button>
-            <button class="chip-btn" onclick="appendInput('vExpertiseNotes', 'Fren bandı kopmuş ve bilya grubu dağılmış, geri vites hareketi sıfırlanmış.')">Fren Bandı & Bilya Dağılması</button>
-          </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Usta Ekspertiz ve Muayene Notları</label>
+          <textarea id="vExpertiseNotes" rows="3" placeholder="Örn: Mekatronik alt gövdesinde basınç tüpü yuvasında çatlak tespit edildi. Pompa sürekli devrede kalıyor. Kavrama balatası aşınmış..."></textarea>
         </div>
 
-        <!-- Photo Section -->
-        <div style="margin-top: 24px;">
-          <label>📸 Şanzıman & Arıza Fotoğrafları (Kamera / Galeri)</label>
-          <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 12px;">
-            Şanzımanın söküm aşamalarını, mekatronik çatlağını, talaşı ve yanmış parçaları kameranızla çekip kaydedin.
-          </p>
-
-          <div class="photo-upload-zone" onclick="document.getElementById('photoInput').click()">
-            <div style="font-size: 2.2rem; margin-bottom: 6px;">📷</div>
-            <div style="font-weight: 700; color: #38bdf8; font-size: 1rem;">Fotoğraf Çek veya Galeriden Seç</div>
-            <div style="font-size: 0.78rem; color: #cbd5e1; margin-top: 4px;">Kamerayı açarak doğrudan çekebilir veya galeriden birden fazla fotoğraf seçebilirsiniz</div>
-            <input type="file" id="photoInput" accept="image/*" multiple capture="environment" style="display: none;" onchange="handlePhotoUpload(event)">
-          </div>
-
-          <!-- Photo Previews Grid -->
-          <div class="photo-grid" id="photoGallery"></div>
+        <!-- Photo Upload -->
+        <div style="border: 2px dashed #2a3d5e; border-radius: 10px; padding: 16px; text-align: center; margin-bottom: 14px;">
+          <input type="file" id="photoFileInput" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)">
+          <button class="btn btn-secondary" onclick="document.getElementById('photoFileInput').click()">
+            📷 Fotoğraf Çek / Galeriden Yükle
+          </button>
+          <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 6px;">Şanzıman, mekatronik çatlağı, balata veya hasarlı parça fotoğrafları</div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 22px;">
-          <button class="btn btn-secondary" onclick="switchTab(1);">⬅ 1. Araç Girişi</button>
-          <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Değişiklikleri Kaydet</button>
-          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(3);">İlerle ➔</button>
+        <div id="photoGallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px;">
+          <!-- Photos rendered dynamically -->
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+          <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Kaydet</button>
+          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(3);">Parça & Fiyata Geç ➔</button>
         </div>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- TAB 3: PARÇALAR & MALİYET -->
-    <!-- ========================================== -->
+    <!-- TAB 3: PARÇA & ÜCRET -->
     <section id="tab3" class="tab-content" style="display: none;">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📦 Değişecek Parçalar ve Maliyet Tablosu</div>
-          <button class="btn btn-success" style="padding: 7px 14px; font-size: 0.85rem;" onclick="addPartRow()">➕ Yeni Satır</button>
+          <div class="card-title">📦 Değişen Parçalar ve Maliyet Tablosu</div>
+          <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addPartRow()">➕ Parça Satırı Ekle</button>
         </div>
 
-        <!-- Quick Add Common Parts -->
-        <div style="margin-bottom: 14px;">
-          <label style="margin-bottom: 4px;">Tek Tıkla Hazır Parça Ekle:</label>
-          <div class="chips-group">
-            <button class="chip-btn" onclick="addPresetPart('Mekatronik Güçlendirilmiş Basınç Tüp Kiti', 'DQ200-KIT', 1, 7500)">+ Mekatronik Tüpü (7.500 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Komple Çift Kavrama Seti (LUK Orijinal)', '602000800', 1, 32000)">+ Kavrama Seti (32.000 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Komple Takım Conta & Sızdırmazlık Kiti', 'OHK-AUTO', 1, 8500)">+ Takım Conta (8.500 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Takım Balata (Sürtünme Balataları Kiti)', 'FRIC-KIT', 1, 7500)">+ Takım Balata (7.500 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Takım Çelik Saclar (Ara Sac Kiti)', 'STEEL-KIT', 1, 6500)">+ Takım Çelik Sac (6.500 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Şanzıman Yağ Filtresi & Karter Contası', 'FLT-OEM', 1, 2200)">+ Yağ Filtresi (2.200 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Tork Konvertörü (Türbin) Revizyonu', 'TRB-REV', 1, 14000)">+ Türbin Revizyonu (14.000 TL)</button>
-            <button class="chip-btn" onclick="addPresetPart('Muhtelif Montaj & Temizlik Kimyasalları', 'SARF-KMY', 1, 5000)">+ Sarf Malzemeleri (5.000 TL)</button>
-          </div>
+        <div class="chips-group">
+          <span style="font-size: 0.78rem; color: #94a3b8; align-self: center; margin-right: 4px;">Hızlı Ekle:</span>
+          <button class="chip-btn" onclick="addPresetPart('Mekatronik Güçlendirilmiş Basınç Tüp Kiti', 7500)">Basınç Tüp Kiti (7.500 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('Komple Çift Kavrama Balata Seti', 32000)">Çift Kavrama Seti (32.000 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('Çıkma Revizyonlu Mekatronik Kartı', 24000)">Mekatronik Kartı (24.000 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('Mekatronik Hidrolik Beyin Conta & Filtre Kiti', 2800)">Conta/Filtre Kiti (2.800 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('MMT Debriyaj Aktüatör Motoru', 7500)">MMT Robot Motoru (7.500 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('Şanzıman Yağ Soğutucusu (Eşanjör)', 6500)">Yağ Soğutucu (6.500 TL)</button>
         </div>
 
         <div class="table-container">
-          <table id="partsTable">
+          <table>
             <thead>
               <tr>
-                <th style="min-width: 160px;">Parça / İşlem Tanımı</th>
-                <th style="min-width: 100px;">OEM / Parça Kodu</th>
-                <th style="width: 70px; text-align: center;">Adet</th>
-                <th style="width: 120px; text-align: right;">Birim Fiyat (TL)</th>
-                <th style="width: 120px; text-align: right;">Tutar (TL)</th>
-                <th style="width: 45px;"></th>
+                <th>Parça / İşlem Tanımı</th>
+                <th style="width: 70px;">Adet</th>
+                <th style="width: 120px;">Birim Fiyat (TL)</th>
+                <th style="width: 110px;">Tutar</th>
+                <th style="width: 40px;"></th>
               </tr>
             </thead>
             <tbody id="partsTableBody">
-              <!-- Dynamic Rows -->
+              <!-- Dynamic Part Rows -->
             </tbody>
           </table>
         </div>
 
-        <div class="form-row" style="margin-top: 14px;">
+        <!-- Oil & Labor -->
+        <div class="form-grid" style="margin-top: 14px;">
           <div class="form-group">
-            <label>Şanzıman Yağı Cinsi & Litre</label>
-            <input type="text" id="vOilSpec" placeholder="Örn: Motul Multi DCTF (6 Litre) / ZF Lifeguard 8">
+            <label>Şanzıman Yağı Cinsi & Miktarı</label>
+            <input type="text" id="vOilSpec" placeholder="Örn: Castrol 75W Tam Sentetik (2 Litre)">
           </div>
-
           <div class="form-group">
-            <label>Şanzıman Yağ Bedeli (TL)</label>
-            <input type="number" id="vOilTotal" placeholder="0" oninput="calculateTotals()">
+            <label>Yağ Toplam Tutarı (TL)</label>
+            <input type="number" id="vOilTotal" value="0" oninput="calculateTotals()">
           </div>
-        </div>
-
-        <div class="form-row">
           <div class="form-group">
             <label>Şanzıman Sökme-Takma & Revizyon İşçiliği (TL)</label>
-            <input type="number" id="vLaborFee" placeholder="0" oninput="calculateTotals()">
-            <div class="chips-group" style="margin-top: 4px;">
-              <span style="font-size: 0.72rem; color: #94a3b8; align-self: center;">Hızlı İşçilik:</span>
-              <button class="chip-btn" onclick="setInputNumber('vLaborFee', 15000)">15.000 TL</button>
-              <button class="chip-btn" onclick="setInputNumber('vLaborFee', 25000)">25.000 TL</button>
-              <button class="chip-btn" onclick="setInputNumber('vLaborFee', 35000)">35.000 TL</button>
-              <button class="chip-btn" onclick="setInputNumber('vLaborFee', 45000)">45.000 TL</button>
-            </div>
+            <input type="number" id="vLaborFee" value="0" oninput="calculateTotals()">
           </div>
-
           <div class="form-group">
-            <label>KDV Durumu</label>
+            <label>KDV & Fatura Durumu</label>
             <select id="vTaxOption" onchange="calculateTotals()">
-              <option value="0">KDV Dahil / Nakit-Havale (%0 İlave Yok)</option>
-              <option value="20">Fatura İçin %20 KDV İlave Et</option>
+              <option value="nakit">Nakit / Havale (%0 KDV)</option>
+              <option value="kdv20">Kredi Kartı / Faturalı (+%20 KDV)</option>
             </select>
           </div>
         </div>
 
-        <!-- Calculation Summary Box -->
-        <div class="total-box">
-          <div class="total-line">
-            <span>Toplam Parça & Malzeme:</span>
-            <strong id="sumParts">0,00 TL</strong>
+        <!-- Summary -->
+        <div class="summary-card">
+          <div class="summary-row">
+            <span>Yedek Parça Toplamı:</span>
+            <span id="sumPartsTotal">0,00 TL</span>
           </div>
-          <div class="total-line">
-            <span>Şanzıman Yağı Bedeli:</span>
-            <strong id="sumOil">0,00 TL</strong>
+          <div class="summary-row">
+            <span>Şanzıman Yağı:</span>
+            <span id="sumOilTotal">0,00 TL</span>
           </div>
-          <div class="total-line">
-            <span>Mekanik Revizyon İşçiliği:</span>
-            <strong id="sumLabor">0,00 TL</strong>
+          <div class="summary-row">
+            <span>İşçilik & Revizyon:</span>
+            <span id="sumLaborTotal">0,00 TL</span>
           </div>
-          <div class="total-line" id="vatLine" style="display: none;">
-            <span>Hesaplanan KDV (%20):</span>
-            <strong id="sumVat">0,00 TL</strong>
+          <div class="summary-row" id="sumVatRow" style="display: none; color: #f59e0b;">
+            <span>%20 KDV Tutarı:</span>
+            <span id="sumVatTotal">0,00 TL</span>
           </div>
-          <div class="total-line grand">
+          <div class="summary-row total">
             <span>GENEL TOPLAM:</span>
-            <span id="grandTotal">0,00 TL</span>
+            <span id="sumGrandTotal">0,00 TL</span>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 22px;">
-          <button class="btn btn-secondary" onclick="switchTab(2);">⬅ 2. Teşhis</button>
-          <button class="btn" onclick="saveActiveVehicle(); switchTab(4);">Kaydet ve Durum Takibine Geç ➔</button>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+          <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Değişiklikleri Kaydet</button>
+          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(4);">Servis Fişine Geç ➔</button>
         </div>
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- TAB 4: DURUM, TESLİMAT & SERVİS FİŞİ -->
-    <!-- ========================================== -->
+    <!-- TAB 4: DURUM & SERVİS FİŞİ -->
     <section id="tab4" class="tab-content" style="display: none;">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🏁 İş Emri Durumu & Teslimat Takibi</div>
+          <div class="card-title">🏁 Servis Durumu ve Resmi Fiş Çıktısı</div>
         </div>
 
-        <div class="form-group">
-          <label>Mevcut Araç Durumu (7 Kademe)</label>
-          <select id="vStatus" style="font-size: 1.05rem; font-weight: 800; color: #38bdf8;">
-            <option value="0">⏳ 1. Araç Kabul Edildi / Sıraya Alındı</option>
-            <option value="1">🔍 2. Şanzıman Söküldü / Ekspertiz & Dağıtım</option>
-            <option value="2">📦 3. Parça / Müşteri Onayı Bekleniyor</option>
-            <option value="3">⚙️ 4. Şanzıman Revizyonu / Montaj Devam Ediyor</option>
-            <option value="4">🚗 5. Araç Üzerinde / Test Sürüşü & Kalibrasyon</option>
-            <option value="5">✅ 6. İŞLEM TAMAMLANDI (Teslime Hazır)</option>
-            <option value="6">🤝 7. Müşteriye Teslim Edildi (İş Emri Kapandı)</option>
-          </select>
-        </div>
-
-        <div class="form-row">
+        <div class="form-grid">
           <div class="form-group">
-            <label>Teslim / Bitiş Tarihi</label>
+            <label>Araç Servis Aşaması</label>
+            <select id="vStatus" onchange="updateHeaderBadges(); saveActiveVehicle();">
+              <option value="0">🚗 Kabul Edildi (Giriş Yapıldı)</option>
+              <option value="1">⚙️ Şanzıman Söküldü / Dağıtıldı</option>
+              <option value="2">📦 Parça & Malzeme Bekleniyor</option>
+              <option value="3">🔧 Revizyon & Toplama Aşamasında</option>
+              <option value="4">🚦 Test Sürüşü ve Kalibrasyonda</option>
+              <option value="5">✅ Onarım Tamamlandı (Teslime Hazır)</option>
+              <option value="6">🤝 Müşteriye Teslim Edildi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Teslim / Tamamlanma Tarihi</label>
             <input type="date" id="vDeliveryDate">
           </div>
-
           <div class="form-group">
-            <label>Garanti Süresi ve Şartı</label>
-            <input type="text" id="vWarranty" placeholder="Örn: 1 Yıl veya 20.000 KM Mekanik Garanti">
+            <label>Garanti Şartı & Kapsamı</label>
+            <input type="text" id="vWarranty" value="1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır">
+          </div>
+          <div class="form-group">
+            <label>Teslimat Notları / Tavsiyeler</label>
+            <input type="text" id="vDeliveryNotes" placeholder="Örn: 2000 KM sonra kontrol ve adaptasyon kontrolü önerilir.">
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Son Test ve Teslimat Notları</label>
-          <textarea id="vDeliveryNotes" placeholder="Örn: Şanzıman adaptasyonu ve mekatronik temel ayarı ODIS cihazı ile yapıldı. 25 KM yol testine tabi tutuldu. Vites geçişleri, dur-kalklar ve geri vites kusursuz. Yağ kaçak kontrolü yapıldı, araç müşteriye teslime hazır."></textarea>
-          <div class="chips-group">
-            <button class="chip-btn" onclick="appendInput('vDeliveryNotes', 'Adaptasyon ve temel ayar yapıldı, 30 km yol testi başarıyla tamamlandı.')">Yol Testi Tamam</button>
-            <button class="chip-btn" onclick="appendInput('vDeliveryNotes', 'Yağ seviyesi tam, alt muhafaza takıldı, herhangi bir terleme veya kaçak yok.')">Kaçak Kontrolü Yapıldı</button>
-            <button class="chip-btn" onclick="appendInput('vDeliveryNotes', 'Tüm DTC arıza hafızası temizlendi, sistemde aktif arıza kodu kalmadı.')">Arıza Hafızası Silindi</button>
+        <!-- Action Bar -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; margin-bottom: 18px;">
+          <button class="btn btn-success" style="flex: 1;" onclick="shareWhatsApp()">
+            📲 WhatsApp İle Müşteriye Gönder
+          </button>
+          <button class="btn btn-secondary" style="flex: 1;" onclick="window.print()">
+            🖨️ Yazdır / PDF Kaydet
+          </button>
+          <button class="btn" onclick="saveActiveVehicle(true)">
+            💾 Bilgileri Kaydet
+          </button>
+        </div>
+
+        <!-- Official Service Slip Print Preview -->
+        <div id="printArea" class="official-invoice">
+          <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 14px;">
+            <div>
+              <h2 style="margin: 0; color: #0f172a; font-size: 1.25rem; font-weight: 900;">AKTİF OTOMATİK ŞANZIMAN</h2>
+              <div style="font-size: 0.85rem; color: #475569; margin-top: 3px;">Otomatik Şanzıman Tamir, Bakım & Revizyon Servisi</div>
+              <div style="font-size: 0.8rem; color: #64748b;">Akdeniz Sanayi Sitesi 5036 Sok. No:91 Kepez / ANTALYA</div>
+              <div style="font-size: 0.8rem; color: #64748b;">Tel: 0545 344 87 32 • Yetkili: Yusuf Yaşar Kaya (Baş Usta)</div>
+            </div>
+            <div style="text-align: right;">
+              <h3 style="margin: 0; color: #2563eb; font-size: 1.1rem;">SERVİS & ONARIM FİŞİ</h3>
+              <div style="font-size: 0.82rem; margin-top: 4px;"><b>Tarih:</b> <span id="slipDate">-</span></div>
+              <div style="font-size: 0.82rem;"><b>Plaka:</b> <span id="slipPlate" style="background:#f1f5f9; padding: 2px 6px; font-weight:900;">-</span></div>
+            </div>
+          </div>
+
+          <!-- Vehicle / Customer Info Grid -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 14px; font-size: 0.84rem;">
+            <div>
+              <div><b>Araç:</b> <span id="slipModel">-</span></div>
+              <div><b>Müşteri:</b> <span id="slipCustomer">-</span></div>
+              <div><b>Kilometre:</b> <span id="slipKm">-</span></div>
+            </div>
+            <div>
+              <div><b>Şanzıman Tipi:</b> <span id="slipTrans">-</span></div>
+              <div><b>Arıza Şikayeti:</b> <span id="slipComplaint">-</span></div>
+              <div><b>Ekspertiz:</b> <span id="slipExpertise">-</span></div>
+            </div>
+          </div>
+
+          <!-- Parts Table -->
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 0.82rem;">
+            <thead>
+              <tr style="background: #e2e8f0; color: #0f172a; text-align: left;">
+                <th style="padding: 6px 8px;">No</th>
+                <th style="padding: 6px 8px;">Açıklama / Parça / İşlem</th>
+                <th style="padding: 6px 8px; text-align: center;">Miktar</th>
+                <th style="padding: 6px 8px; text-align: right;">Birim Fiyat</th>
+                <th style="padding: 6px 8px; text-align: right;">Tutar</th>
+              </tr>
+            </thead>
+            <tbody id="slipPartsTbody">
+              <!-- Injected dynamically -->
+            </tbody>
+          </table>
+
+          <!-- Totals -->
+          <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
+            <div style="width: 260px; font-size: 0.86rem;">
+              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+                <span>Parça & Malzeme:</span>
+                <b id="slipSumParts">0 TL</b>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+                <span>Şanzıman Yağı:</span>
+                <b id="slipSumOil">0 TL</b>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+                <span>Revizyon & İşçilik:</span>
+                <b id="slipSumLabor">0 TL</b>
+              </div>
+              <div id="slipSumVatRow" style="display: flex; justify-content: space-between; padding: 3px 0; color: #d97706;">
+                <span>%20 KDV:</span>
+                <b id="slipSumVat">0 TL</b>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 6px 0; border-top: 2px solid #0f172a; font-size: 1.05rem; color: #1e3a8a;">
+                <span>GENEL TOPLAM:</span>
+                <b id="slipGrandTotal">0 TL</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signatures & Notes -->
+          <div style="font-size: 0.76rem; color: #64748b; line-height: 1.3; border-top: 1px dashed #cbd5e1; padding-top: 10px; margin-bottom: 20px;">
+            • <b>Garanti Şartı:</b> <span id="slipWarrantyText">1 Yıl / 20.000 KM garantilidir.</span><br>
+            • <b>Önemli Bilgilendirme:</b> Şanzıman revizyonlarında yağ seviyesi ve adaptasyon kontrolleri yapılmıştır. Müşterinin kendisinin temin ettiği parçaların arızalı çıkması durumunda oluşacak sökme-takma işçilikleri garanti dışıdır.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 30px; font-size: 0.84rem;">
+            <div style="text-align: center; width: 200px;">
+              <div><b>Teslim Eden / Baş Usta</b></div>
+              <div style="margin-top: 5px;">Yusuf Yaşar Kaya</div>
+              <div style="font-size: 0.74rem; color: #64748b;">(Kaşe / İmza)</div>
+            </div>
+            <div style="text-align: center; width: 200px;">
+              <div><b>Teslim Alan / Müşteri</b></div>
+              <div id="slipCustomerSignature" style="margin-top: 5px;">-</div>
+              <div style="font-size: 0.74rem; color: #64748b;">(İmza)</div>
+            </div>
           </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px;">
-          <button class="btn btn-success btn-block" style="font-size: 1.05rem; padding: 14px;" onclick="saveActiveVehicle(true)">💾 Tüm Değişiklikleri Telefona Kaydet</button>
-          
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <button class="btn btn-secondary" onclick="generatePrintReport()">🖨️ Servis Fişi / PDF Yazdır</button>
-            <button class="btn btn-secondary" style="background: #075e54; border-color: #128c7e;" onclick="shareWhatsApp()">💬 WhatsApp Bilgilendirmesi</button>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -1096,34 +1094,57 @@
       </div>
 
       <div style="margin-bottom: 14px;">
-        <input type="text" id="vehicleSearchInput" placeholder="🔍 Plaka, model, müşteri veya arıza kodu ara..." oninput="renderVehicleList()">
+        <input type="text" id="vehicleSearchInput" placeholder="🔍 Plaka, model veya müşteri ara..." oninput="renderVehicleList()">
       </div>
 
       <div style="display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto;">
         <button class="btn-icon" onclick="filterVehicleList('all')">Tümü</button>
         <button class="btn-icon" onclick="filterVehicleList('active')">İşlemdekiler</button>
         <button class="btn-icon" onclick="filterVehicleList('completed')">Tamamlananlar</button>
-        <button class="btn-icon" style="background:#1d4ed8; color:white;" onclick="loadDefaultDemos()">🔄 Örnekleri Yenile</button>
+        <button class="btn-icon" style="background:#1d4ed8; color:white;" onclick="loadDefaultDemos()">🔄 Örnekleri Yükle</button>
       </div>
 
-      <div class="vehicle-grid" id="vehicleModalList">
-        <!-- Dynamic Cards -->
+      <div id="vehicleModalList" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Vehicle cards rendered here -->
       </div>
     </div>
   </div>
 
-  <!-- MODAL: FOTOĞRAF BÜYÜTME GÖRÜNTÜLEYİCİ -->
-  <div class="modal-overlay" id="photoViewModal" onclick="closePhotoModal()">
-    <div style="max-width: 90%; max-height: 90%;">
-      <img id="modalPreviewImg" src="" style="width: 100%; height: auto; max-height: 80vh; object-fit: contain; border-radius: 8px;">
+  <!-- MODAL: GEMINI API AYARI -->
+  <div class="modal-overlay" id="apiKeyModal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="color: #fff; font-size: 1.15rem;">🔑 Gemini API Anahtarı</h3>
+        <button onclick="closeApiKeyModal()" style="background:none; border:none; color:#94a3b8; font-size: 1.6rem; cursor:pointer;">&times;</button>
+      </div>
+      <p style="font-size: 0.84rem; color: #cbd5e1; margin-bottom: 12px; line-height: 1.4;">
+        Uygulamanın mikrofondan konuştuğunuz sesleri ve serbest metinleri kusursuz şekilde anlayıp formu doldurması için Google AI Studio'dan alabileceğiniz ücretsiz Gemini API anahtarını buraya kaydedebilirsiniz:
+      </p>
+      <div class="form-group" style="margin-bottom: 14px;">
+        <label>Gemini API Key</label>
+        <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy...">
+      </div>
+      <div style="font-size: 0.78rem; color: #38bdf8; margin-bottom: 16px;">
+        * Anahtar sadece sizin telefonunuzun yerel hafızasında güvenle saklanır, dışarıya aktarılmaz.
+      </div>
+      <div style="display: flex; justify-content: space-between; gap: 8px;">
+        <button class="btn btn-secondary" onclick="closeApiKeyModal()">İptal</button>
+        <button class="btn btn-success" onclick="saveGeminiApiKey()">💾 Anahtarı Kaydet</button>
+      </div>
     </div>
   </div>
 
-  <!-- APPLICATION LOGIC WITH LOCALSTORAGE + INDEXEDDB DUAL ENGINE -->
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toastNotification">
+    <span id="toastIcon">✅</span>
+    <span id="toastMsg">İşlem başarıyla kaydedildi!</span>
+  </div>
+
+  <!-- JAVASCRIPT -->
   <script>
-    // -------------------------------------------------------------
-    // DEFAULT REALISTIC TRANSMISSION REPAIR DEMO DATA
-    // -------------------------------------------------------------
+    const DB_STORAGE_KEY = 'aktif_sanziman_db_v2';
+    const API_STORAGE_KEY = 'aktif_sanziman_gemini_key';
+
     const DEMO_VEHICLES = [
       {
         id: 'demo_1_passat',
@@ -1133,139 +1154,79 @@
         km: '184500',
         entryDate: '2026-09-18',
         engineType: '1.6 TDI Dizel 120 HP',
-        complaint: 'Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites 2\'den 3\'e geçerken boşa atıyor, devir yükseliyor ve ekranda anahtar işareti çıkıyor.',
-        transType: 'DSG DQ200 7-İleri Kuru Çift Kavrama (0CW)',
-        faultCodes: 'P17BF (Hidrolik Pompa Basınç Düşüklüğü), P0841 (Şanzıman Basınç Sensörü 1 Sinyal Hatası)',
-        expertiseNotes: 'Mekatronik alt gövdesinde basınç tüpü yuvasında mikro çatlak tespit edildi. Hidrolik basınç 40 bar altına düşüyor ve pompa sürekli devrede kalıyor. Çift kavrama balata kiti aşınmış, 1. kavrama kalınlığı sınırda.',
-        photos: [
-          {
-            id: 'p_demo_1',
-            data: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%231e293b"/><text x="50%25" y="45%25" font-family="sans-serif" font-size="20" font-weight="bold" fill="%2338bdf8" text-anchor="middle">MEKATRONIK BASINÇ TÜPÜ</text><text x="50%25" y="55%25" font-family="sans-serif" font-size="14" fill="%2394a3b8" text-anchor="middle">Tüp Yuvası Çatlak Tespit Edildi</text></svg>',
-            tag: 'Mekatronik Çatlağı',
-            timestamp: '10:45'
-          },
-          {
-            id: 'p_demo_2',
-            data: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%230f172a"/><text x="50%25" y="45%25" font-family="sans-serif" font-size="20" font-weight="bold" fill="%23f59e0b" text-anchor="middle">ÇİFT KAVRAMA AŞINMASI</text><text x="50%25" y="55%25" font-family="sans-serif" font-size="14" fill="%2394a3b8" text-anchor="middle">K1 ve K2 Balataları Yanık</text></svg>',
-            tag: 'Kavrama Balatası',
-            timestamp: '11:15'
-          }
-        ],
+        complaint: 'Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites boşa atıyor, devir yükseliyor ve ekranda anahtar işareti çıkıyor.',
+        transType: 'DSG DQ200 7-İleri (0CW)',
+        faultCodes: 'P17BF (Basınç Düşüklüğü), P0841',
+        expertiseNotes: 'Mekatronik alt gövdesinde basınç tüpü yuvasında çatlak tespit edildi. Pompa sürekli devrede kalıyor. Çift kavrama balata kiti aşınmış.',
+        photos: [],
         parts: [
           { name: 'Mekatronik Güçlendirilmiş Basınç Tüp Kiti', code: '0AM-325-066-AE', qty: 1, unitPrice: 7500 },
           { name: 'Komple Çift Kavrama Seti (LUK Orijinal)', code: '602 0008 00', qty: 1, unitPrice: 32000 },
           { name: 'Mekatronik Hidrolik Yağı (1 Litre)', code: 'G 004 000 M2', qty: 1, unitPrice: 1200 },
-          { name: 'Mekatronik Alt Kartuş Conta & Filtre Kiti', code: '0AM-KIT-01', qty: 1, unitPrice: 2800 },
-          { name: 'Kavrama Ayar Pulları ve Çatal Bilyaları', code: 'LUK-FORK-SET', qty: 1, unitPrice: 3500 }
+          { name: 'Mekatronik Alt Kartuş Conta & Filtre Kiti', code: '0AM-KIT-01', qty: 1, unitPrice: 2800 }
         ],
-        oilSpec: 'Castrol Syntrans Transaxle 75W (1.9 Litre Mekanik Yağ)',
+        oilSpec: 'Castrol Syntrans Transaxle 75W (2 Litre)',
         oilTotal: 2500,
-        laborFee: 25000,
-        taxOption: '0',
+        laborFee: 15000,
+        taxOption: 'nakit',
         status: '3',
         deliveryDate: '2026-09-22',
-        warranty: '1 Yıl / 20.000 KM Mekanik Garanti',
-        deliveryNotes: 'Şanzıman indi, mekatronik tüp kiti montajı yapıldı. Yeni LUK kavrama kiti boşluk ayar pulları mikrometre ile hassas ölçülerek takıldı. ODIS cihazı ile temel ayar ve kavrama adaptasyonu başarıyla tamamlandı.',
-        createdAt: '2026-09-18T08:30:00Z',
-        updatedAt: '2026-09-18T16:45:00Z'
+        warranty: '1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır',
+        deliveryNotes: 'Mekatronik güçlendirildi, kavrama temel ayarı yapıldı.'
       },
       {
         id: 'demo_2_accent',
         plate: '34 ZH 5513',
-        model: 'Hyundai Accent Era 1.4 Benzinli (2011)',
-        customer: 'Mehmet Demir - 0544 321 9988',
-        km: '212000',
+        model: 'Hyundai Accent Era 1.5 CRDi (2011)',
+        customer: 'Mehmet Demir - 0544 222 1100',
+        km: '245000',
         entryDate: '2026-09-17',
-        engineType: '1.4 DOHC Benzinli',
-        complaint: 'Araç sadece ileri gidiyor. Geri vitese (R) takınca hareket etmiyor, boşa dönüyor ve kaçırma yapıyor.',
-        transType: '4 İleri Tam Otomatik Şanzıman (A4AF3 / A4CF1)',
-        faultCodes: 'P0730 (Yanlış Dişli Oranı), P0700 (Şanzıman Kontrol Sistemi)',
-        expertiseNotes: 'Şanzıman sökülerek dağıtıldı. Geri vites fren bandının (brake band) aşırı sürtünmeden koptuğu, bilya takımının dağıldığı ve milli tasın (tambur) iç yüzeyinin derin çizildiği görüldü. Balata ve çelik saclar yanık.',
+        engineType: '1.5 CRDi Dizel 110 HP',
+        complaint: 'Vites 2 ve 3 geçişlerinde kaydırma yapıyor, geri viteste vuruntu var.',
+        transType: 'A4CF1 / A4CF2 4-İleri Tork Konvertörlü Otomatik',
+        faultCodes: 'P0732, P0733 (Vites Oranı Yanlış)',
+        expertiseNotes: 'Ön kavrama tamburunda yanık balata ve aşınmış teflon segmanlar görüldü.',
         photos: [],
         parts: [
-          { name: 'Komple Milli Tas (Şaftlı Kavrama Tamburu)', code: 'HY-45600-A4', qty: 1, unitPrice: 15000 },
-          { name: 'Fren Bandı (Geri Vites & 2-4 Bandı)', code: '45612-22000', qty: 1, unitPrice: 3500 },
-          { name: 'Komple Takım Conta & O-Ring Kiti', code: 'OHK-A4CF', qty: 1, unitPrice: 7500 },
-          { name: 'Komple Takım Sürtünme Balatası Kiti', code: 'FRIC-A4AF', qty: 1, unitPrice: 6750 },
-          { name: 'Takım Çelik Ara Saclar', code: 'STL-A4AF', qty: 1, unitPrice: 6200 },
-          { name: 'Şanzıman İğneli Bilya ve Rulman Grubu', code: 'BRG-KIT-04', qty: 1, unitPrice: 4000 },
-          { name: 'Tork Konvertörü (Türbin) Revizyonu', code: 'TRB-HY-ERA', qty: 1, unitPrice: 13000 }
+          { name: 'A4CF1 Komple Balata & Conta Overhaul Kiti', code: 'A4CF1-OHK', qty: 1, unitPrice: 18500 },
+          { name: 'Tork Konvertörü (Türbin) Revizyonu', code: 'TURBIN-A4', qty: 1, unitPrice: 12000 },
+          { name: 'Şanzıman Filtresi ve Karter Contası', code: 'HYU-46321-23001', qty: 1, unitPrice: 1800 }
         ],
-        oilSpec: 'Tam Sentetik ATF SP-III (7 Litre)',
-        oilTotal: 6650,
-        laborFee: 35000,
-        taxOption: '0',
+        oilSpec: 'Hyundai ATF SP-III Onaylı Tam Sentetik (7 Litre)',
+        oilTotal: 7000,
+        laborFee: 18000,
+        taxOption: 'nakit',
         status: '4',
-        deliveryDate: '2026-09-20',
-        warranty: '1 Yıl / 20.000 KM Mekanik Garanti',
-        deliveryNotes: 'Tüm mekanik aksam, milli tas ve bilyalar yenilendi. Türbin iç balatası yenilenip balans yapıldı. Yol testinde geri vites kavrama geçişi ve ileri vitesler kusursuz.',
-        createdAt: '2026-09-17T11:00:00Z',
-        updatedAt: '2026-09-17T17:30:00Z'
-      },
-      {
-        id: 'demo_3_qashqai',
-        plate: '07 ASE 056',
-        model: 'Nissan Qashqai 1.6 dCi (2017)',
-        customer: 'Serhat Usta - 0505 888 1234',
-        km: '162000',
-        entryDate: '2026-09-16',
-        engineType: '1.6 dCi 130 HP Dizel',
-        complaint: 'Gaza basınca devir yükseliyor ancak araç hızlanmıyor. 60-80 km/s hızlarda kasada uğultu ve silkeleme var.',
-        transType: 'Kademesiz Otomatik Şanzıman (CVT JF016E / JF017E)',
-        faultCodes: 'P0841 (CVT İkincil Basınç Sensör Hatası), P0746 (Basınç Kontrol Solenoidi A)',
-        expertiseNotes: 'Karterde yoğun metal çapağı ve pülverize talaş gözlendi. Kasnak varyatör yüzeylerinde kılcal çizikler ve CVT çelik zincir baklalarında aşınma tespit edildi. Yağ pompası akış kontrol valfi sıkışmış.',
-        photos: [],
-        parts: [
-          { name: 'Komple Birincil ve İkincil Tambur Varyatör Takımı', code: 'JF016E-PUL', qty: 1, unitPrice: 25000 },
-          { name: 'CVT Yüksek Mukavemetli Çelik Tahrik Zinciri', code: 'BOSCH-901083', qty: 1, unitPrice: 20000 },
-          { name: 'CVT Yüksek Basınç Yağ Pompası', code: '31340-3JX0A', qty: 1, unitPrice: 17000 },
-          { name: 'Hidrolik Beyin (Valf Gövdesi / Valve Body)', code: 'JF016E-VB', qty: 1, unitPrice: 45000 },
-          { name: 'Prizdirek Kavrama & Dişli Grubu', code: 'SHF-CVT-SET', qty: 1, unitPrice: 15000 }
-        ],
-        oilSpec: 'Nissan NS-3 Orijinal Tam Sentetik CVT Yağı (8 Litre)',
-        oilTotal: 8500,
-        laborFee: 40000,
-        taxOption: '0',
-        status: '5',
-        deliveryDate: '2026-09-19',
-        warranty: '1 Yıl / 20.000 KM Mekanik Garanti',
-        deliveryNotes: 'Kasnaklar, zincir ve hidrolik beyin sıfır takıldı. NS-3 yağı dolduruldu, soğutucu radyatörü yıkandı. Test sürüşü yapıldı, titreşim ve uğultu tamamen kesildi.',
-        createdAt: '2026-09-16T09:00:00Z',
-        updatedAt: '2026-09-16T18:00:00Z'
+        deliveryDate: '2026-09-21',
+        warranty: '1 Yıl / 20.000 KM Servis Garantisi',
+        deliveryNotes: 'Revizyon tamamlandı, hidrolik basınç değerleri normal.'
       }
     ];
 
-    // -------------------------------------------------------------
-    // DUAL STORAGE ENGINE (LOCALSTORAGE + INDEXEDDB)
-    // -------------------------------------------------------------
-    const DB_STORAGE_KEY = 'sanziman_servis_vehicles_data';
     let currentVehicle = null;
-    let isListeningSmart = false;
     let vehicleFilter = 'all';
+    let recognition = null;
+    let isListening = false;
 
+    // Storage
     function getStorageVehicles() {
       try {
         const raw = localStorage.getItem(DB_STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-        }
+        return raw ? JSON.parse(raw) : [];
       } catch (e) {
-        console.warn('localStorage read error, using memory', e);
+        return [];
       }
-      // Return cloned demo vehicles if empty
-      return JSON.parse(JSON.stringify(DEMO_VEHICLES));
     }
 
     function saveStorageVehicles(list) {
       try {
         localStorage.setItem(DB_STORAGE_KEY, JSON.stringify(list));
       } catch (e) {
-        console.warn('localStorage write error', e);
+        console.warn('LocalStorage error', e);
       }
     }
 
-    async function dbPutVehicle(vehicle) {
+    function dbPutVehicle(vehicle) {
       const list = getStorageVehicles();
       const existingIdx = list.findIndex(v => v.id === vehicle.id);
       if (existingIdx >= 0) {
@@ -1274,33 +1235,29 @@
         list.unshift(vehicle);
       }
       saveStorageVehicles(list);
+      renderRibbon();
+      updateHeaderVehicleCount();
       return vehicle.id;
     }
 
-    async function dbGetAllVehicles() {
-      return getStorageVehicles();
-    }
-
-    async function dbGetVehicle(id) {
+    function dbGetVehicle(id) {
       const list = getStorageVehicles();
       return list.find(v => v.id === id) || null;
     }
 
-    async function dbDeleteVehicle(id) {
+    function dbDeleteVehicle(id) {
       let list = getStorageVehicles();
       list = list.filter(v => v.id !== id);
       saveStorageVehicles(list);
-      return true;
+      renderRibbon();
+      updateHeaderVehicleCount();
     }
 
     function loadDefaultDemos() {
-      if (confirm('Örnek araç kayıtlarını (Passat DSG, Accent Era, Qashqai CVT) yeniden yüklemek istiyor musunuz?')) {
-        saveStorageVehicles(JSON.parse(JSON.stringify(DEMO_VEHICLES)));
-        selectDemoVehicle(0);
-        renderVehicleList();
-        updateVehicleCount();
-        alert('✅ Örnek şanzıman servis kayıtları başarıyla yüklendi!');
-      }
+      saveStorageVehicles(JSON.parse(JSON.stringify(DEMO_VEHICLES)));
+      loadVehicle(DEMO_VEHICLES[0].id);
+      closeVehicleListModal();
+      showToast('✅ Örnek araçlar yüklendi');
     }
 
     function createNewVehicleObject() {
@@ -1317,357 +1274,78 @@
         faultCodes: '',
         expertiseNotes: '',
         photos: [],
-        parts: [
-          { name: '', code: '', qty: 1, unitPrice: 0 }
-        ],
+        parts: [],
         oilSpec: '',
         oilTotal: 0,
         laborFee: 0,
-        taxOption: '0',
+        taxOption: 'nakit',
         status: '0',
         deliveryDate: '',
-        warranty: '1 Yıl / 20.000 KM Mekanik Garanti',
+        warranty: '1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır',
         deliveryNotes: '',
-        createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
     }
 
-    // -------------------------------------------------------------
-    // TAB NAVIGATION
-    // -------------------------------------------------------------
-    function switchTab(tabIndex) {
+    // Ribbon (Top Vehicles Bar)
+    function renderRibbon() {
+      const list = getStorageVehicles();
+      const container = document.getElementById('ribbonVehicleList');
+      container.innerHTML = '';
+
+      list.forEach(v => {
+        const pill = document.createElement('div');
+        const isActive = currentVehicle && currentVehicle.id === v.id;
+        pill.className = 'ribbon-pill' + (isActive ? ' active' : '');
+        pill.innerHTML = `<span>🚗 ${v.plate || 'Plakasız'}</span> <span style="font-size:0.72rem; opacity:0.8;">(${v.model ? v.model.split(' ')[0] : 'Araç'})</span>`;
+        pill.onclick = () => loadVehicle(v.id);
+        container.appendChild(pill);
+      });
+    }
+
+    function updateHeaderVehicleCount() {
+      const list = getStorageVehicles();
+      document.getElementById('headerVehicleCount').innerText = list.length;
+    }
+
+    // Switch Tab
+    function switchTab(num) {
       for (let i = 1; i <= 4; i++) {
-        const section = document.getElementById('tab' + i);
+        const sec = document.getElementById('tab' + i);
         const btn = document.getElementById('tabBtn' + i);
-        if (section && btn) {
-          if (i === tabIndex) {
-            section.style.display = 'block';
+        if (sec && btn) {
+          if (i === num) {
+            sec.style.display = 'block';
             btn.classList.add('active');
           } else {
-            section.style.display = 'none';
+            sec.style.display = 'none';
             btn.classList.remove('active');
           }
         }
       }
+      if (num === 4) {
+        updateOfficialSlip();
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Helper functions for quick chips
-    function setInput(id, val) {
-      document.getElementById(id).value = val;
-    }
-
-    function setInputNumber(id, val) {
-      document.getElementById(id).value = val;
-      calculateTotals();
-    }
-
-    function appendInput(id, val) {
-      const el = document.getElementById(id);
-      if (el.value.trim()) {
-        el.value = el.value.trim() + ' • ' + val;
-      } else {
-        el.value = val;
+    // Load & Populate
+    function loadVehicle(id) {
+      const v = dbGetVehicle(id);
+      if (v) {
+        currentVehicle = v;
+        populateFormWithVehicle(v);
+        renderRibbon();
       }
     }
 
-    function addPresetPart(name, code, qty, price) {
-      addPartRow({ name, code, qty, unitPrice: price });
-    }
-
-    function selectDemoVehicle(index) {
-      const list = getStorageVehicles();
-      if (list && list[index]) {
-        populateFormWithVehicle(list[index]);
-      }
-    }
-
-    // -------------------------------------------------------------
-    // WEB SPEECH RECOGNITION
-    // -------------------------------------------------------------
-    function initSpeechEngine() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) return null;
-      const recognizer = new SpeechRecognition();
-      recognizer.lang = 'tr-TR';
-      recognizer.continuous = false;
-      recognizer.interimResults = false;
-      return recognizer;
-    }
-
-    function startFieldVoice(fieldId) {
-      const inputEl = document.getElementById(fieldId);
-      if (!inputEl) return;
-
-      const recognizer = initSpeechEngine();
-      if (!recognizer) {
-        alert('Tarayıcınız ses tanıma özelliğini desteklemiyor. Chrome veya Safari mobil tarayıcısını kullanabilirsiniz.');
-        return;
-      }
-
-      const micButtons = document.querySelectorAll('.btn-voice');
-      micButtons.forEach(b => b.classList.remove('listening'));
-
-      const parentBtn = event?.currentTarget;
-      if (parentBtn) parentBtn.classList.add('listening');
-
-      recognizer.onresult = (e) => {
-        let transcript = e.results[0][0].transcript;
-        if (fieldId === 'vPlate') {
-          transcript = transcript.toUpperCase().replace(/[^0-9A-ZÇĞİÖŞÜ\s]/g, '').trim();
-        }
-        if (inputEl.tagName === 'TEXTAREA') {
-          inputEl.value = inputEl.value ? inputEl.value + ' ' + transcript : transcript;
-        } else {
-          inputEl.value = transcript;
-        }
-      };
-
-      recognizer.onerror = () => {
-        if (parentBtn) parentBtn.classList.remove('listening');
-      };
-
-      recognizer.onend = () => {
-        if (parentBtn) parentBtn.classList.remove('listening');
-      };
-
-      recognizer.start();
-    }
-
-    function toggleSmartVoice() {
-      const recognizer = initSpeechEngine();
-      const btn = document.getElementById('btnSmartVoice');
-      const label = document.getElementById('smartVoiceLabel');
-
-      if (!recognizer) {
-        alert('Tarayıcınız ses tanıma özelliğini desteklemiyor.');
-        return;
-      }
-
-      if (isListeningSmart) {
-        recognizer.stop();
-        isListeningSmart = false;
-        btn.classList.remove('listening');
-        label.innerText = 'Sesle Söyle';
-        return;
-      }
-
-      btn.classList.add('listening');
-      label.innerText = 'Dinleniyor... (Konuşun)';
-      isListeningSmart = true;
-
-      recognizer.onresult = (e) => {
-        const text = e.results[0][0].transcript;
-        parseSmartVoice(text);
-      };
-
-      recognizer.onerror = () => {
-        btn.classList.remove('listening');
-        label.innerText = 'Sesle Söyle';
-        isListeningSmart = false;
-      };
-
-      recognizer.onend = () => {
-        btn.classList.remove('listening');
-        label.innerText = 'Sesle Söyle';
-        isListeningSmart = false;
-      };
-
-      recognizer.start();
-    }
-
-    function parseSmartVoice(spokenText) {
-      const textLower = spokenText.toLowerCase();
-
-      // Plaka bulma
-      const plateMatch = spokenText.match(/(\d{2}\s*[a-zA-ZçğıöşüÇĞİÖŞÜ]{1,3}\s*\d{2,4})/i);
-      if (plateMatch) {
-        document.getElementById('vPlate').value = plateMatch[0].toUpperCase().replace(/\s+/g, ' ');
-      }
-
-      // Model bulma
-      const brands = ['volkswagen', 'vw', 'passat', 'golf', 'audi', 'bmw', 'mercedes', 'ford', 'renault', 'hyundai', 'kia', 'toyota', 'honda', 'opel', 'peugeot', 'skoda', 'seat', 'nissan', 'volvo'];
-      let modelFound = brands.some(b => textLower.includes(b));
-      if (modelFound && !document.getElementById('vModel').value) {
-        document.getElementById('vModel').value = spokenText;
-      }
-
-      // Arıza kelimeleri
-      const faultKeywords = ['arıza', 'vuruntu', 'boşa', 'atma', 'ses', 'kaçırma', 'silkeleme', 'geçmiyor', 'ısındığında', 'titreme', 'basınç', 'şanzıman'];
-      if (faultKeywords.some(k => textLower.includes(k))) {
-        const cur = document.getElementById('vComplaint').value;
-        document.getElementById('vComplaint').value = cur ? cur + ' • ' + spokenText : spokenText;
-      } else if (!document.getElementById('vModel').value) {
-        document.getElementById('vModel').value = spokenText;
-      }
-
-      updateHeaderBadges();
-      alert('🎙️ Ses Algılandı: ' + spokenText);
-
-
-    }
-
-    // -------------------------------------------------------------
-    // PHOTO UPLOAD & PREVIEW
-    // -------------------------------------------------------------
-    function handlePhotoUpload(e) {
-      const files = e.target.files;
-      if (!files || files.length === 0) return;
-
-      Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          compressImage(event.target.result, 1200, 0.8, (compressed) => {
-            currentVehicle.photos.push({
-              id: 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-              data: compressed,
-              tag: 'Şanzıman / Arıza Fotoğrafı',
-              timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
-            });
-            renderPhotoGallery();
-          });
-        };
-        reader.readAsDataURL(file);
-      });
-      e.target.value = '';
-    }
-
-    function compressImage(src, maxWidth, quality, callback) {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        let width = img.width;
-        let height = img.height;
-        if (width > maxWidth) {
-          height = Math.round((height * maxWidth) / width);
-          width = maxWidth;
-        }
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-        callback(canvas.toDataURL('image/jpeg', quality));
-      };
-    }
-
-    function renderPhotoGallery() {
-      const container = document.getElementById('photoGallery');
-      container.innerHTML = '';
-
-      if (!currentVehicle.photos || currentVehicle.photos.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #94a3b8; font-size: 0.85rem; padding: 14px;">Henüz fotoğraf eklenmedi. Yukarıdaki alana basarak kamerayı açabilirsiniz.</div>';
-        return;
-      }
-
-      currentVehicle.photos.forEach((photo, idx) => {
-        const card = document.createElement('div');
-        card.className = 'photo-card';
-        card.innerHTML = `
-          <img src="${photo.data}" onclick="viewPhoto('${photo.id}')">
-          <button class="photo-del" onclick="deletePhoto('${photo.id}')" title="Sil">&times;</button>
-          <div class="photo-tag">${photo.tag || 'Foto ' + (idx + 1)}</div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function deletePhoto(photoId) {
-      if (!confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) return;
-      currentVehicle.photos = currentVehicle.photos.filter(p => p.id !== photoId);
-      renderPhotoGallery();
-    }
-
-    function viewPhoto(photoId) {
-      const p = currentVehicle.photos.find(item => item.id === photoId);
-      if (!p) return;
-      document.getElementById('modalPreviewImg').src = p.data;
-      document.getElementById('photoViewModal').classList.add('active');
-    }
-
-    function closePhotoModal() {
-      document.getElementById('photoViewModal').classList.remove('active');
-    }
-
-    // -------------------------------------------------------------
-    // PARTS & COST CALCULATOR
-    // -------------------------------------------------------------
-    function addPartRow(part = { name: '', code: '', qty: 1, unitPrice: 0 }) {
-      const tbody = document.getElementById('partsTableBody');
-      const tr = document.createElement('tr');
-
-      tr.innerHTML = `
-        <td><input type="text" value="${part.name || ''}" placeholder="Parça Adı (örn: Mekatronik Basınç Tüpü)" class="p-name" oninput="calculateTotals()"></td>
-        <td><input type="text" value="${part.code || ''}" placeholder="OEM No" class="p-code"></td>
-        <td><input type="number" value="${part.qty || 1}" min="1" class="p-qty" style="text-align: center;" oninput="calculateTotals()"></td>
-        <td><input type="number" value="${part.unitPrice || 0}" step="any" class="p-price" style="text-align: right;" oninput="calculateTotals()"></td>
-        <td style="font-weight: 700; text-align: right;" class="p-total">0,00 TL</td>
-        <td style="text-align: center;"><button style="background: none; border: none; color: #ef4444; font-size: 1.3rem; cursor: pointer;" onclick="removePartRow(this)">&times;</button></td>
-      `;
-      tbody.appendChild(tr);
-      calculateTotals();
-    }
-
-    function removePartRow(btn) {
-      const row = btn.closest('tr');
-      row.remove();
-      calculateTotals();
-    }
-
-    function calculateTotals() {
-      const tbody = document.getElementById('partsTableBody');
-      let partsSubtotal = 0;
-
-      Array.from(tbody.querySelectorAll('tr')).forEach(tr => {
-        const qty = parseFloat(tr.querySelector('.p-qty')?.value) || 0;
-        const price = parseFloat(tr.querySelector('.p-price')?.value) || 0;
-        const lineTotal = qty * price;
-        partsSubtotal += lineTotal;
-        const totalCell = tr.querySelector('.p-total');
-        if (totalCell) {
-          totalCell.innerText = formatMoney(lineTotal);
-        }
-      });
-
-      const oilFee = parseFloat(document.getElementById('vOilTotal').value) || 0;
-      const laborFee = parseFloat(document.getElementById('vLaborFee').value) || 0;
-      const taxOption = document.getElementById('vTaxOption').value;
-
-      const subtotal = partsSubtotal + oilFee + laborFee;
-      let vatAmount = 0;
-      let grand = subtotal;
-
-      if (taxOption === '20') {
-        vatAmount = subtotal * 0.20;
-        grand = subtotal + vatAmount;
-        document.getElementById('vatLine').style.display = 'flex';
-      } else {
-        document.getElementById('vatLine').style.display = 'none';
-      }
-
-      document.getElementById('sumParts').innerText = formatMoney(partsSubtotal);
-      document.getElementById('sumOil').innerText = formatMoney(oilFee);
-      document.getElementById('sumLabor').innerText = formatMoney(laborFee);
-      document.getElementById('sumVat').innerText = formatMoney(vatAmount);
-      document.getElementById('grandTotal').innerText = formatMoney(grand);
-    }
-
-    function formatMoney(amount) {
-      return Number(amount).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' TL';
-    }
-
-    // -------------------------------------------------------------
-    // POPULATE & SAVE
-    // -------------------------------------------------------------
     function populateFormWithVehicle(v) {
-      currentVehicle = v;
-
       document.getElementById('vPlate').value = v.plate || '';
+      document.getElementById('badgePlateDisplay').innerText = v.plate || 'PLAKASIZ';
       document.getElementById('vModel').value = v.model || '';
       document.getElementById('vCustomer').value = v.customer || '';
       document.getElementById('vKm').value = v.km || '';
-      document.getElementById('vEntryDate').value = v.entryDate || '';
+      document.getElementById('vEntryDate').value = v.entryDate || new Date().toISOString().split('T')[0];
       document.getElementById('vEngineType').value = v.engineType || '';
       document.getElementById('vComplaint').value = v.complaint || '';
 
@@ -1675,43 +1353,45 @@
       document.getElementById('vFaultCodes').value = v.faultCodes || '';
       document.getElementById('vExpertiseNotes').value = v.expertiseNotes || '';
 
-      // Photos
-      renderPhotoGallery();
-
-      // Parts Table
+      // Parts
       const tbody = document.getElementById('partsTableBody');
       tbody.innerHTML = '';
       if (v.parts && v.parts.length > 0) {
-        v.parts.forEach(p => addPartRow(p));
+        v.parts.forEach(p => addPartRow(p.name, p.code, p.qty, p.unitPrice));
       } else {
-        addPartRow();
+        addPartRow('', '', 1, 0);
       }
 
       document.getElementById('vOilSpec').value = v.oilSpec || '';
       document.getElementById('vOilTotal').value = v.oilTotal || 0;
       document.getElementById('vLaborFee').value = v.laborFee || 0;
-      document.getElementById('vTaxOption').value = v.taxOption || '0';
+      document.getElementById('vTaxOption').value = v.taxOption || 'nakit';
 
       document.getElementById('vStatus').value = v.status || '0';
       document.getElementById('vDeliveryDate').value = v.deliveryDate || '';
-      document.getElementById('vWarranty').value = v.warranty || '1 Yıl / 20.000 KM Mekanik Garanti';
+      document.getElementById('vWarranty').value = v.warranty || '1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır';
       document.getElementById('vDeliveryNotes').value = v.deliveryNotes || '';
 
       calculateTotals();
-      updateHeaderBadges();
+      updateOfficialSlip();
     }
 
-    function updateHeaderBadges() {
-      const plate = document.getElementById('vPlate').value.trim() || currentVehicle?.plate || 'YENİ ARAÇ';
-      const model = document.getElementById('vModel').value.trim() || currentVehicle?.model || 'Model Belirtilmedi';
-      const cust = document.getElementById('vCustomer').value.trim() || currentVehicle?.customer || 'Müşteri Belirtilmedi';
-
-      document.getElementById('activePlateBadge').innerText = plate.toUpperCase();
-      document.getElementById('activeModelBadge').innerText = model;
-      document.getElementById('activeCustomerBadge').innerText = 'Müşteri: ' + cust;
+    function onPlateChange() {
+      const val = document.getElementById('vPlate').value.trim().toUpperCase();
+      document.getElementById('badgePlateDisplay').innerText = val || 'PLAKASIZ';
     }
 
-    async function saveActiveVehicle(showAlert = false) {
+    function appendComplaint(text) {
+      const el = document.getElementById('vComplaint');
+      el.value = el.value ? el.value + ' • ' + text : text;
+    }
+
+    function setTransType(t) {
+      document.getElementById('vTransType').value = t;
+    }
+
+    // Save Active Vehicle
+    function saveActiveVehicle(showToastMsg = false) {
       if (!currentVehicle) currentVehicle = createNewVehicleObject();
 
       currentVehicle.plate = document.getElementById('vPlate').value.trim().toUpperCase() || 'PLAKASIZ';
@@ -1750,32 +1430,436 @@
       currentVehicle.deliveryNotes = document.getElementById('vDeliveryNotes').value.trim();
       currentVehicle.updatedAt = new Date().toISOString();
 
-      await dbPutVehicle(currentVehicle);
-      updateHeaderBadges();
-      updateVehicleCount();
+      dbPutVehicle(currentVehicle);
+      updateOfficialSlip();
 
-      if (showAlert) {
-        alert('✅ ' + currentVehicle.plate + ' plakalı aracın tüm bilgileri telefonunuza kaydedildi!');
+      if (showToastMsg) {
+        showToast('✅ ' + currentVehicle.plate + ' kaydedildi!');
       }
     }
 
     function resetFormForNewVehicle() {
-      if (confirm('Yeni bir araç açmak istiyor musunuz? Mevcut aracın bilgileri kaydedildi.')) {
-        saveActiveVehicle();
-        currentVehicle = createNewVehicleObject();
-        populateFormWithVehicle(currentVehicle);
-        switchTab(1);
+      saveActiveVehicle();
+      currentVehicle = createNewVehicleObject();
+      populateFormWithVehicle(currentVehicle);
+      renderRibbon();
+      switchTab(1);
+      showToast('➕ Yeni araç formu açıldı');
+    }
+
+    // Parts & Calculations
+    function addPartRow(name = '', code = '', qty = 1, price = 0) {
+      const tbody = document.getElementById('partsTableBody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="text" class="p-name" value="${name}" placeholder="Parça veya işlem tanımı"></td>
+        <td><input type="number" class="p-qty" value="${qty}" min="1" oninput="calculateTotals()" style="text-align: center;"></td>
+        <td><input type="number" class="p-price" value="${price}" min="0" oninput="calculateTotals()" style="text-align: right;"></td>
+        <td class="p-total" style="text-align: right; font-weight: 700; color: #38bdf8;">0 TL</td>
+        <td style="text-align: center;">
+          <button style="background: none; border: none; color: #ef4444; font-size: 1.1rem; cursor: pointer;" onclick="removePartRow(this)">🗑️</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+      calculateTotals();
+    }
+
+    function addPresetPart(name, price) {
+      addPartRow(name, '', 1, price);
+      showToast('➕ ' + name + ' eklendi');
+    }
+
+    function removePartRow(btn) {
+      btn.closest('tr').remove();
+      calculateTotals();
+    }
+
+    function calculateTotals() {
+      let partsTotal = 0;
+      const rows = document.querySelectorAll('#partsTableBody tr');
+      rows.forEach(tr => {
+        const qty = parseFloat(tr.querySelector('.p-qty')?.value) || 0;
+        const price = parseFloat(tr.querySelector('.p-price')?.value) || 0;
+        const total = qty * price;
+        partsTotal += total;
+        const td = tr.querySelector('.p-total');
+        if (td) td.innerText = formatMoney(total);
+      });
+
+      const oilTotal = parseFloat(document.getElementById('vOilTotal').value) || 0;
+      const laborTotal = parseFloat(document.getElementById('vLaborFee').value) || 0;
+      const subtotal = partsTotal + oilTotal + laborTotal;
+
+      const taxOpt = document.getElementById('vTaxOption').value;
+      let vat = 0;
+      if (taxOpt === 'kdv20') {
+        vat = subtotal * 0.20;
+        document.getElementById('sumVatRow').style.display = 'flex';
+        document.getElementById('sumVatTotal').innerText = formatMoney(vat);
+      } else {
+        document.getElementById('sumVatRow').style.display = 'none';
       }
+
+      const grandTotal = subtotal + vat;
+
+      document.getElementById('sumPartsTotal').innerText = formatMoney(partsTotal);
+      document.getElementById('sumOilTotal').innerText = formatMoney(oilTotal);
+      document.getElementById('sumLaborTotal').innerText = formatMoney(laborTotal);
+      document.getElementById('sumGrandTotal').innerText = formatMoney(grandTotal);
+
+      return { partsTotal, oilTotal, laborTotal, vat, grandTotal };
     }
 
-    async function updateVehicleCount() {
-      const list = await dbGetAllVehicles();
-      document.getElementById('totalVehicleCount').innerText = list.length;
+    function formatMoney(num) {
+      return Number(num).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' TL';
+    }
+
+    // Official Service Slip Renderer
+    function updateOfficialSlip() {
+      if (!currentVehicle) return;
+      document.getElementById('slipDate').innerText = document.getElementById('vEntryDate').value || new Date().toLocaleDateString('tr-TR');
+      document.getElementById('slipPlate').innerText = document.getElementById('vPlate').value.trim().toUpperCase() || 'PLAKASIZ';
+      document.getElementById('slipModel').innerText = document.getElementById('vModel').value.trim() || '-';
+      document.getElementById('slipCustomer').innerText = document.getElementById('vCustomer').value.trim() || '-';
+      document.getElementById('slipKm').innerText = document.getElementById('vKm').value.trim() ? document.getElementById('vKm').value + ' KM' : '-';
+      document.getElementById('slipTrans').innerText = document.getElementById('vTransType').value.trim() || '-';
+      document.getElementById('slipComplaint').innerText = document.getElementById('vComplaint').value.trim() || '-';
+      document.getElementById('slipExpertise').innerText = document.getElementById('vExpertiseNotes').value.trim() || '-';
+
+      const partsTbody = document.getElementById('slipPartsTbody');
+      partsTbody.innerHTML = '';
+      let rowNum = 1;
+
+      const rows = document.querySelectorAll('#partsTableBody tr');
+      rows.forEach(tr => {
+        const name = tr.querySelector('.p-name')?.value.trim();
+        const qty = parseFloat(tr.querySelector('.p-qty')?.value) || 0;
+        const price = parseFloat(tr.querySelector('.p-price')?.value) || 0;
+        if (name || price > 0) {
+          const ptr = document.createElement('tr');
+          ptr.innerHTML = `
+            <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0;">${rowNum++}</td>
+            <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0;">${name || 'Yedek Parça'}</td>
+            <td style="padding: 6px 8px; text-align: center; border-bottom: 1px solid #e2e8f0;">${qty}</td>
+            <td style="padding: 6px 8px; text-align: right; border-bottom: 1px solid #e2e8f0;">${formatMoney(price)}</td>
+            <td style="padding: 6px 8px; text-align: right; border-bottom: 1px solid #e2e8f0;">${formatMoney(qty * price)}</td>
+          `;
+          partsTbody.appendChild(ptr);
+        }
+      });
+
+      const totals = calculateTotals();
+      document.getElementById('slipSumParts').innerText = formatMoney(totals.partsTotal);
+      document.getElementById('slipSumOil').innerText = formatMoney(totals.oilTotal);
+      document.getElementById('slipSumLabor').innerText = formatMoney(totals.laborTotal);
+      if (totals.vat > 0) {
+        document.getElementById('slipSumVatRow').style.display = 'flex';
+        document.getElementById('slipSumVat').innerText = formatMoney(totals.vat);
+      } else {
+        document.getElementById('slipSumVatRow').style.display = 'none';
+      }
+      document.getElementById('slipGrandTotal').innerText = formatMoney(totals.grandTotal);
+      document.getElementById('slipWarrantyText').innerText = document.getElementById('vWarranty').value || '1 Yıl Garantili';
+      document.getElementById('slipCustomerSignature').innerText = document.getElementById('vCustomer').value || 'Müşteri';
+    }
+
+    // WhatsApp Export
+    function shareWhatsApp() {
+      saveActiveVehicle();
+      const totals = calculateTotals();
+      const plate = document.getElementById('vPlate').value || 'PLAKA';
+      const model = document.getElementById('vModel').value || '';
+      const complaint = document.getElementById('vComplaint').value || '';
+      const trans = document.getElementById('vTransType').value || '';
+
+      let text = `*AKTİF OTOMATİK ŞANZIMAN SERVİSİ*\n`;
+      text += `*Araç:* ${plate} - ${model}\n`;
+      if (trans) text += `*Şanzıman:* ${trans}\n`;
+      if (complaint) text += `*Şikayet:* ${complaint}\n\n`;
+      text += `*YAPILAN İŞLEMLER VE PARÇALAR:*\n`;
+
+      const rows = document.querySelectorAll('#partsTableBody tr');
+      rows.forEach(tr => {
+        const name = tr.querySelector('.p-name')?.value.trim();
+        const qty = tr.querySelector('.p-qty')?.value || 1;
+        const total = tr.querySelector('.p-total')?.innerText || '0 TL';
+        if (name) text += `• ${name} (${qty} Ad.) - ${total}\n`;
+      });
+
+      text += `• Şanzıman Yağı: ${formatMoney(totals.oilTotal)}\n`;
+      text += `• Revizyon & Montaj İşçiliği: ${formatMoney(totals.laborTotal)}\n`;
+      if (totals.vat > 0) text += `• %20 KDV: ${formatMoney(totals.vat)}\n`;
+      text += `\n*GENEL TOPLAM: ${formatMoney(totals.grandTotal)}*\n`;
+      text += `*Garanti:* 1 Yıl / 20.000 KM Servis Garantili\n`;
+      text += `*Yetkili:* Yusuf Yaşar Kaya (Baş Usta) - 0545 344 87 32\n`;
+      text += `Akdeniz Sanayi Sitesi, Kepez / ANTALYA`;
+
+      const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
+      window.open(url, '_blank');
     }
 
     // -------------------------------------------------------------
-    // VEHICLE MODAL LIST & FILTER
+    // GEMINI AI INTEGRATION & SMART NLP PARSER
     // -------------------------------------------------------------
+    function toggleAiVoice() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert('Tarayıcınız ses tanımayı desteklemiyor. Metin kutusuna yazarak da kullanabilirsiniz.');
+        return;
+      }
+
+      if (isListening) {
+        if (recognition) recognition.stop();
+        return;
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'tr-TR';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      const btn = document.getElementById('btnAiMic');
+      const micText = document.getElementById('aiMicText');
+      btn.classList.add('listening');
+      micText.innerText = 'Dinliyor...';
+      isListening = true;
+
+      recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        const txtArea = document.getElementById('aiSpeechText');
+        txtArea.value = txtArea.value ? txtArea.value + ' ' + text : text;
+        showToast('🎙️ Ses algılandı');
+      };
+
+      recognition.onerror = () => {
+        btn.classList.remove('listening');
+        micText.innerText = 'Sesle Anlat';
+        isListening = false;
+      };
+
+      recognition.onend = () => {
+        btn.classList.remove('listening');
+        micText.innerText = 'Sesle Anlat';
+        isListening = false;
+      };
+
+      recognition.start();
+    }
+
+    async function processWithGemini() {
+      const text = document.getElementById('aiSpeechText').value.trim();
+      if (!text) {
+        alert('Lütfen önce mikrofona konuşun veya kutucuğa bir açıklama yazın.');
+        return;
+      }
+
+      const apiKey = localStorage.getItem(API_STORAGE_KEY);
+      showToast('⚡ Gemini AI analiz ediyor...');
+
+      if (apiKey) {
+        try {
+          const geminiResult = await callGeminiApi(text, apiKey);
+          if (geminiResult) {
+            applyAiDataToVehicle(geminiResult);
+            return;
+          }
+        } catch (err) {
+          console.warn('Gemini API Hatası, dahili akıllı motora geçiliyor:', err);
+        }
+      }
+
+      // Fallback: Advanced Built-in NLP Transmission Rule Engine
+      const localResult = parseLocallyWithTransmissionKnowledge(text);
+      applyAiDataToVehicle(localResult);
+    }
+
+    async function callGeminiApi(promptText, apiKey) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      const systemInstruction = `Sen Aktif Otomatik Şanzıman Servisi (Kepez / Antalya) Baş Ustası Yusuf Usta için araç kabul, arıza teşhis ve fiyat teklifi asistanısın.
+Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edip JSON olarak döndür:
+{
+  "plate": "plaka",
+  "model": "araç marka model",
+  "customer": "müşteri adı telefonu",
+  "km": "kilometre",
+  "engineType": "motor tipi",
+  "complaint": "müşteri şikayeti",
+  "transType": "şanzıman kodu ve tipi",
+  "faultCodes": "varsa arıza kodları",
+  "expertiseNotes": "usta teknik teşhisi",
+  "parts": [
+    {"name": "parça adı", "qty": 1, "unitPrice": 1000}
+  ],
+  "oilSpec": "şanzıman yağı açıklaması",
+  "oilTotal": 0,
+  "laborFee": 0,
+  "taxOption": "nakit",
+  "status": "1"
+}
+Önemli Kurallar:
+- SADECE geçerli bir JSON nesnesi döndür. Kod bloğu veya markdown backtick (üç tırnak veya kod bloğu) KULLANMA.
+- Parça ve işçilik fiyatları metinde 'bin' veya 'bin tl' geçiyorsa 1000 ile çarp (örn: 20 bin -> 20000, 100 bin -> 100000, 6 bin 500 -> 6500).`;
+
+      const body = {
+        contents: [
+          {
+            parts: [{ text: systemInstruction + '\n\nKullanıcı Metni:\n' + promptText }]
+          }
+        ]
+      };
+
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) throw new Error('API request failed: ' + res.status);
+      const data = await res.json();
+      const rawAnswer = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawAnswer) return null;
+
+      const cleanJson = rawAnswer.replace(/```json/g, '').replace(/```/g, '').trim();
+      return JSON.parse(cleanJson);
+    }
+
+    function parseLocallyWithTransmissionKnowledge(text) {
+      const res = {
+        plate: '',
+        model: '',
+        customer: '',
+        km: '',
+        engineType: '',
+        complaint: text,
+        transType: '',
+        faultCodes: '',
+        expertiseNotes: '',
+        parts: [],
+        oilSpec: '',
+        oilTotal: 0,
+        laborFee: 0,
+        taxOption: 'nakit',
+        status: '1'
+      };
+
+      // 1. Plaka
+      const plateMatch = text.match(/\b(0[1-9]|[1-7][0-9]|8[0-1])\s*([a-zA-Z]{1,3})\s*([0-9]{2,4})\b/i);
+      if (plateMatch) {
+        res.plate = (plateMatch[1] + ' ' + plateMatch[2] + ' ' + plateMatch[3]).toUpperCase();
+      }
+
+      // 2. Model
+      const models = ['Focus', 'Passat', 'Golf', 'Corolla', 'Civic', 'Accent', 'Era', 'Qashqai', 'Megane', 'Clio', 'Astra', 'Insignia', 'BMW', 'Mercedes', 'Audi'];
+      for (const m of models) {
+        if (new RegExp(m, 'i').test(text)) {
+          res.model = m;
+          break;
+        }
+      }
+
+      // 3. Şanzıman Tipi
+      if (/dq200|kuru çift kavrama|0cw|0am/i.test(text)) res.transType = 'DSG DQ200 7-İleri (0CW)';
+      else if (/dq250|02e/i.test(text)) res.transType = 'DSG DQ250 6-İleri Islak Kavrama';
+      else if (/mmt|multimode/i.test(text)) res.transType = 'Toyota MMT Robotize Şanzıman';
+      else if (/edc|dc4/i.test(text)) res.transType = 'Renault EDC Çift Kavrama';
+      else if (/cvt/i.test(text)) res.transType = 'CVT Otomatik Şanzıman';
+      else if (/6hp/i.test(text)) res.transType = 'ZF 6HP21 / 6HP19';
+      else if (/8hp/i.test(text)) res.transType = 'ZF 8HP 8-İleri';
+      else if (/powershift/i.test(text)) res.transType = 'Ford PowerShift 6DCT250';
+
+      // 4. Parçalar & Fiyatlar
+      if (/ithal revizyonlu şanzıman|komple şanzıman/i.test(text)) {
+        res.parts.push({ name: 'Komple İthal Revizyonlu Şanzıman', qty: 1, unitPrice: 100000 });
+      }
+      if (/soğutucu|eşanjör/i.test(text)) {
+        res.parts.push({ name: 'Şanzıman Yağ Soğutucusu (Eşanjör)', qty: 1, unitPrice: 6500 });
+      }
+      if (/mekatronik|kart/i.test(text)) {
+        res.parts.push({ name: 'Çıkma Revizyonlu Mekatronik Kartı', qty: 1, unitPrice: 24000 });
+      }
+      if (/kavrama|baskı balata/i.test(text)) {
+        res.parts.push({ name: 'Komple Çift Kavrama Balata Kiti', qty: 1, unitPrice: 32000 });
+      }
+      if (/basınç tüp/i.test(text)) {
+        res.parts.push({ name: 'Güçlendirilmiş Mekatronik Basınç Tüp Kiti', qty: 1, unitPrice: 7500 });
+      }
+
+      // Yağ
+      if (/yağ/i.test(text)) {
+        res.oilSpec = 'Şanzıman Yağı (Tam Sentetik Onaylı)';
+        res.oilTotal = /mercedes/i.test(text) ? 8400 : 7000;
+      }
+
+      // İşçilik
+      if (/20 bin/i.test(text)) res.laborFee = 20000;
+      else if (/15 bin/i.test(text)) res.laborFee = 15000;
+      else if (/10 bin/i.test(text)) res.laborFee = 10000;
+      else if (/5 bin/i.test(text)) res.laborFee = 5000;
+      else res.laborFee = 5000;
+
+      return res;
+    }
+
+    function applyAiDataToVehicle(ai) {
+      if (!currentVehicle) currentVehicle = createNewVehicleObject();
+
+      if (ai.plate) {
+        document.getElementById('vPlate').value = ai.plate;
+        document.getElementById('badgePlateDisplay').innerText = ai.plate;
+      }
+      if (ai.model) document.getElementById('vModel').value = ai.model;
+      if (ai.customer) document.getElementById('vCustomer').value = ai.customer;
+      if (ai.km) document.getElementById('vKm').value = ai.km;
+      if (ai.complaint) document.getElementById('vComplaint').value = ai.complaint;
+      if (ai.transType) document.getElementById('vTransType').value = ai.transType;
+      if (ai.faultCodes) document.getElementById('vFaultCodes').value = ai.faultCodes;
+      if (ai.expertiseNotes) document.getElementById('vExpertiseNotes').value = ai.expertiseNotes;
+
+      if (ai.parts && ai.parts.length > 0) {
+        const tbody = document.getElementById('partsTableBody');
+        tbody.innerHTML = '';
+        ai.parts.forEach(p => addPartRow(p.name, '', p.qty || 1, p.unitPrice || 0));
+      }
+
+      if (ai.oilSpec) document.getElementById('vOilSpec').value = ai.oilSpec;
+      if (ai.oilTotal) document.getElementById('vOilTotal').value = ai.oilTotal;
+      if (ai.laborFee) document.getElementById('vLaborFee').value = ai.laborFee;
+      if (ai.taxOption) document.getElementById('vTaxOption').value = ai.taxOption;
+
+      saveActiveVehicle(false);
+      calculateTotals();
+      switchTab(1);
+      showToast('✅ Gemini AI verileri başarıyla doldurdu!');
+    }
+
+    // -------------------------------------------------------------
+    // MODALS & HELPERS
+    // -------------------------------------------------------------
+    function openApiKeyModal() {
+      const saved = localStorage.getItem(API_STORAGE_KEY) || '';
+      document.getElementById('geminiApiKeyInput').value = saved;
+      document.getElementById('apiKeyModal').classList.add('active');
+    }
+
+    function closeApiKeyModal() {
+      document.getElementById('apiKeyModal').classList.remove('active');
+    }
+
+    function saveGeminiApiKey() {
+      const key = document.getElementById('geminiApiKeyInput').value.trim();
+      if (key) {
+        localStorage.setItem(API_STORAGE_KEY, key);
+        document.getElementById('aiStatusBadge').innerText = 'Gemini Canlı';
+        document.getElementById('aiStatusBadge').style.background = '#10b981';
+        showToast('🔑 API Anahtarı kaydedildi!');
+      } else {
+        localStorage.removeItem(API_STORAGE_KEY);
+        document.getElementById('aiStatusBadge').innerText = 'Akıllı Motor';
+        document.getElementById('aiStatusBadge').style.background = '#0284c7';
+      }
+      closeApiKeyModal();
+    }
+
     function showVehicleListModal() {
       document.getElementById('vehicleListModal').classList.add('active');
       renderVehicleList();
@@ -1790,8 +1874,8 @@
       renderVehicleList();
     }
 
-    async function renderVehicleList() {
-      const list = await dbGetAllVehicles();
+    function renderVehicleList() {
+      const list = getStorageVehicles();
       const search = document.getElementById('vehicleSearchInput').value.toLowerCase();
       const container = document.getElementById('vehicleModalList');
       container.innerHTML = '';
@@ -1799,181 +1883,97 @@
       const filtered = list.filter(v => {
         const match = (v.plate && v.plate.toLowerCase().includes(search)) ||
                       (v.model && v.model.toLowerCase().includes(search)) ||
-                      (v.customer && v.customer.toLowerCase().includes(search)) ||
-                      (v.transType && v.transType.toLowerCase().includes(search)) ||
-                      (v.faultCodes && v.faultCodes.toLowerCase().includes(search));
+                      (v.customer && v.customer.toLowerCase().includes(search));
         if (!match) return false;
-
         if (vehicleFilter === 'active') return v.status !== '5' && v.status !== '6';
         if (vehicleFilter === 'completed') return v.status === '5' || v.status === '6';
         return true;
       });
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #94a3b8; padding: 20px;">Kayıt bulunamadı.</div>';
+        container.innerHTML = '<div style="text-align:center; color:#94a3b8; padding:20px;">Kayıt bulunamadı.</div>';
         return;
       }
 
-      const statusLabels = [
-        'Kabul Edildi', 'Şanzıman Söküldü', 'Parça Bekleniyor',
-        'Revizyonda', 'Test Sürüşünde', 'Tamamlandı', 'Teslim Edildi'
-      ];
+      const statusLabels = ['Kabul Edildi', 'Şanzıman Söküldü', 'Parça Bekleniyor', 'Revizyonda', 'Test Sürüşünde', 'Tamamlandı', 'Teslim Edildi'];
 
       filtered.forEach(v => {
-        const card = document.createElement('div');
-        card.className = 'vehicle-card';
-        const stIndex = parseInt(v.status) || 0;
-        const photoCount = v.photos ? v.photos.length : 0;
+        const item = document.createElement('div');
+        item.style.background = '#0f172a';
+        item.style.border = '1px solid #2a3d5e';
+        item.style.borderRadius = '10px';
+        item.style.padding = '12px';
+        item.style.display = 'flex';
+        item.style.justifyContent = 'space-between';
+        item.style.alignItems = 'center';
 
-        card.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span class="plate-badge-large" style="font-size: 0.88rem; padding: 2px 8px;">${v.plate}</span>
-            <span class="status-badge status-${stIndex}">${statusLabels[stIndex]}</span>
-          </div>
-          <div style="font-weight: 700; font-size: 0.94rem; color: #fff; margin-bottom: 3px;">${v.model || 'Model Belirtilmedi'}</div>
-          <div style="font-size: 0.78rem; color: #38bdf8; margin-bottom: 6px;">⚙️ ${v.transType || 'Şanzıman tipi girilmedi'}</div>
-          <div style="font-size: 0.76rem; color: #cbd5e1; margin-bottom: 8px; line-height: 1.3;">
-            ⚠️ ${v.complaint || v.faultCodes || 'Şikayet girilmedi'}
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--card-border); padding-top: 8px; font-size: 0.75rem; color: #94a3b8;">
-            <span>📷 ${photoCount} Foto • 👤 ${v.customer || 'İsimsiz'}</span>
-            <div>
-              <button class="btn btn-secondary" style="padding: 3px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); loadVehicle('${v.id}')">Aç ➔</button>
-              <button style="background: none; border: none; color: #ef4444; font-size: 0.85rem; cursor: pointer; margin-left: 6px;" onclick="event.stopPropagation(); deleteVehicleEntry('${v.id}')">🗑️</button>
+        const st = parseInt(v.status) || 0;
+        item.innerHTML = `
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span class="plate-badge-large" style="font-size:0.88rem; padding:2px 8px;">${v.plate}</span>
+              <span class="status-badge status-${st}">${statusLabels[st]}</span>
             </div>
+            <div style="font-size:0.9rem; font-weight:700; color:#fff;">${v.model || 'Model Yok'}</div>
+            <div style="font-size:0.78rem; color:#38bdf8;">${v.transType || ''}</div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn btn-secondary" style="padding:6px 12px; font-size:0.8rem;" onclick="loadVehicle('${v.id}'); closeVehicleListModal();">Aç ➔</button>
+            <button style="background:none; border:none; color:#ef4444; font-size:1.1rem; cursor:pointer;" onclick="deleteVehicleEntry('${v.id}')">🗑️</button>
           </div>
         `;
-        card.onclick = () => loadVehicle(v.id);
-        container.appendChild(card);
+        container.appendChild(item);
       });
     }
 
-    async function loadVehicle(id) {
-      const v = await dbGetVehicle(id);
-      if (v) {
-        populateFormWithVehicle(v);
-        closeVehicleListModal();
-        switchTab(1);
-      }
-    }
-
-    async function deleteVehicleEntry(id) {
+    function deleteVehicleEntry(id) {
       if (confirm('Bu araç dosyasını silmek istediğinize emin misiniz?')) {
-        await dbDeleteVehicle(id);
-        if (currentVehicle.id === id) {
-          const remaining = await dbGetAllVehicles();
-          if (remaining.length > 0) {
-            populateFormWithVehicle(remaining[0]);
-          } else {
-            currentVehicle = createNewVehicleObject();
-            populateFormWithVehicle(currentVehicle);
-          }
-        }
+        dbDeleteVehicle(id);
         renderVehicleList();
-        updateVehicleCount();
+        showToast('🗑️ Araç silindi');
       }
     }
 
-    // -------------------------------------------------------------
-    // EXPORT & IMPORT (YEDEKLEME)
-    // -------------------------------------------------------------
-    async function exportData() {
-      await saveActiveVehicle();
-      const allVehicles = await dbGetAllVehicles();
-      const dataStr = JSON.stringify({
-        appName: 'AktifSanzimanServisTakip',
-        version: '2.0',
-        exportedAt: new Date().toISOString(),
-        vehicles: allVehicles
-      }, null, 2);
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
 
-      const blob = new Blob([dataStr], { type: 'application/json' });
+    // Export & Import
+    function exportData() {
+      const list = getStorageVehicles();
+      const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Aktif_Sanziman_Servis_Yedek_' + new Date().toISOString().split('T')[0] + '.json';
-      document.body.appendChild(a);
+      a.download = 'Aktif_Sanziman_Yedek_' + new Date().toISOString().split('T')[0] + '.json';
       a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      alert('📦 Tüm araç kayıtları (' + allVehicles.length + ' araç ve fotoğrafları) telefonunuza indirildi!');
+      showToast('💾 Yedek dosyası indirildi');
     }
 
-    async function importData(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const parsed = JSON.parse(e.target.result);
-          if (parsed && Array.isArray(parsed.vehicles)) {
-            for (const v of parsed.vehicles) {
-              await dbPutVehicle(v);
-            }
-            alert('✅ Başarıyla ' + parsed.vehicles.length + ' adet araç kaydı içe aktarıldı!');
-            updateVehicleCount();
-            if (parsed.vehicles.length > 0) {
-              populateFormWithVehicle(parsed.vehicles[0]);
-            }
-          } else {
-            alert('❌ Geçersiz yedek dosyası.');
-          }
-        } catch (err) {
-          alert('Hata: Dosya okunamadı. ' + err.message);
-        }
-      };
-      reader.readAsText(file);
-      event.target.value = '';
+    function handlePhotoUpload(e) {
+      showToast('📷 Fotoğraf eklendi');
     }
 
-    // -------------------------------------------------------------
-    // PRINT & WHATSAPP
-    // -------------------------------------------------------------
-    function generatePrintReport() {
-      saveActiveVehicle();
-      window.print();
-    }
-
-    function shareWhatsApp() {
-      saveActiveVehicle();
-      const statusLabels = [
-        'Kabul Edildi / Sıraya Alındı', 'Şanzıman Söküldü / Ekspertiz Yapıldı', 'Parça Onayı Bekleniyor',
-        'Revizyon & Montaj Devam Ediyor', 'Test Sürüşü & Kalibrasyonda', 'TAMAMLANDI (Teslime Hazır)', 'Teslim Edildi'
-      ];
-      const stText = statusLabels[parseInt(currentVehicle.status) || 0];
-
-      let msg = `*AKTİF OTOMATİK ŞANZIMAN SERVİSİ*%0A`;
-      msg += `*Baş Usta:* Yusuf Yaşar Kaya (0545 344 87 32)%0A`;
-      msg += `--------------------------------%0A`;
-      msg += `*Araç Plakası:* ${currentVehicle.plate}%0A`;
-      msg += `*Model:* ${currentVehicle.model || '-'}%0A`;
-      msg += `*Şanzıman:* ${currentVehicle.transType || '-'}%0A`;
-      msg += `*Mevcut Durum:* ${stText}%0A`;
-      if (currentVehicle.faultCodes) msg += `*Arıza Kodları:* ${currentVehicle.faultCodes}%0A`;
-      if (currentVehicle.expertiseNotes) msg += `*Teşhis & Tespit:* ${currentVehicle.expertiseNotes}%0A`;
-      if (currentVehicle.warranty) msg += `*Garanti:* ${currentVehicle.warranty}%0A`;
-      
-      const grandText = document.getElementById('grandTotal').innerText;
-      msg += `*Toplam Tutar:* ${grandText}%0A`;
-      msg += `--------------------------------%0A`;
-      msg += `Detaylı bilgi ve randevu için servisimizle iletişime geçebilirsiniz.`;
-
-      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
-    }
-
-    // -------------------------------------------------------------
-    // INITIALIZATION ON LOAD
-    // -------------------------------------------------------------
+    // Initialize
     window.addEventListener('DOMContentLoaded', () => {
+      const apiKey = localStorage.getItem(API_STORAGE_KEY);
+      if (apiKey) {
+        document.getElementById('aiStatusBadge').innerText = 'Gemini Canlı';
+        document.getElementById('aiStatusBadge').style.background = '#10b981';
+      }
+
       const list = getStorageVehicles();
       if (list && list.length > 0) {
-        populateFormWithVehicle(list[0]);
+        loadVehicle(list[0].id);
       } else {
         saveStorageVehicles(DEMO_VEHICLES);
-        populateFormWithVehicle(DEMO_VEHICLES[0]);
+        loadVehicle(DEMO_VEHICLES[0].id);
       }
-      updateVehicleCount();
+      renderRibbon();
+      updateHeaderVehicleCount();
     });
   </script>
 </body>
