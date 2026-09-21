@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Aktif Otomatik Şanzıman - Profesyonel Servis Takip ve Yapay Zeka Sistemi</title>
+  <title>Aktif Otomatik Şanzıman - Servis Takip ve Dijital Yönetim Sistemi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
     :root {
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --primary-light: rgba(37, 99, 235, 0.15);
       --bg: #0b1329;
       --card-bg: #152238;
       --card-border: #233554;
@@ -198,26 +197,25 @@
       color: white;
     }
 
-    /* AI CARD (GEMINI INTEGRATION) */
+    /* AI CARD (GEMINI ENTEGRASYONU) */
     .ai-card {
-      background: linear-gradient(135deg, rgba(37,99,235,0.18) 0%, rgba(6,182,212,0.1) 100%);
+      background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(6,182,212,0.12) 100%);
       border: 1.5px solid #38bdf8;
       border-radius: var(--radius);
-      padding: 18px;
+      padding: 16px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(56,189,248,0.18);
-      position: relative;
+      box-shadow: 0 4px 20px rgba(56,189,248,0.2);
     }
 
     .ai-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .ai-title {
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: #ffffff;
       display: flex;
@@ -236,12 +234,6 @@
       letter-spacing: 0.5px;
     }
 
-    .ai-input-box {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
     .ai-textarea {
       width: 100%;
       background: #0f172a;
@@ -251,7 +243,7 @@
       color: #f8fafc;
       font-size: 0.92rem;
       resize: vertical;
-      min-height: 72px;
+      min-height: 70px;
       outline: none;
       transition: border-color 0.2s;
     }
@@ -267,6 +259,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 8px;
+      margin-top: 10px;
     }
 
     .btn-ai-mic {
@@ -310,17 +303,6 @@
       gap: 8px;
       box-shadow: 0 4px 14px rgba(37,99,235,0.4);
       transition: all 0.2s;
-    }
-
-    .btn-ai-submit:hover {
-      background: linear-gradient(135deg, #1d4ed8, #0369a1);
-    }
-
-    .ai-hint {
-      font-size: 0.76rem;
-      color: #94a3b8;
-      margin-top: 6px;
-      line-height: 1.4;
     }
 
     /* Navigation Tabs */
@@ -395,7 +377,7 @@
       gap: 8px;
     }
 
-    /* Forms */
+    /* Form Fields */
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -477,37 +459,13 @@
       transition: all 0.2s;
     }
 
-    .btn:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-success {
-      background: #059669;
-    }
-
-    .btn-success:hover {
-      background: #047857;
-    }
-
-    .btn-secondary {
-      background: #334155;
-    }
-
-    .btn-secondary:hover {
-      background: #475569;
-    }
-
-    .btn-danger {
-      background: #dc2626;
-    }
-
-    .btn-danger:hover {
-      background: #b91c1c;
-    }
-
-    .btn-block {
-      width: 100%;
-    }
+    .btn:hover { background: var(--primary-hover); }
+    .btn-success { background: #059669; }
+    .btn-success:hover { background: #047857; }
+    .btn-secondary { background: #334155; }
+    .btn-secondary:hover { background: #475569; }
+    .btn-danger { background: #dc2626; }
+    .btn-danger:hover { background: #b91c1c; }
 
     /* Tables */
     .table-container {
@@ -594,6 +552,25 @@
     .status-5 { background: #10b981; color: white; }
     .status-6 { background: #64748b; color: white; }
 
+    /* Audio Memos List */
+    .audio-card {
+      background: #0f172a;
+      border: 1px solid #2a3d5e;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .audio-card audio {
+      height: 36px;
+      outline: none;
+      flex: 1;
+    }
+
     /* Modals */
     .modal-overlay {
       position: fixed;
@@ -607,9 +584,7 @@
       padding: 16px;
     }
 
-    .modal-overlay.active {
-      display: flex;
-    }
+    .modal-overlay.active { display: flex; }
 
     .modal-content {
       background: #152238;
@@ -623,7 +598,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
-    /* Toast Notification */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -643,25 +618,152 @@
       gap: 8px;
     }
 
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* Print Preview */
+    /* KURUMSAL RESMİ SERVİS FİŞİ (A4 NİZAMİ) */
     .official-invoice {
       background: #ffffff;
       color: #0f172a;
       padding: 24px;
       border-radius: 8px;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       margin-top: 14px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      line-height: 1.4;
+    }
+
+    .inv-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2.5px solid #1e3a8a;
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .inv-brand-name {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #1e3a8a;
+      letter-spacing: 0.5px;
+    }
+
+    .inv-brand-sub {
+      font-size: 0.85rem;
+      color: #475569;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .inv-address {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .inv-doc-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #2563eb;
+      text-align: right;
+    }
+
+    .inv-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      font-size: 0.84rem;
+    }
+
+    .inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 0.83rem;
+    }
+
+    .inv-table th {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 8px 10px;
+      font-weight: 700;
+      border: 1px solid #1e293b;
+    }
+
+    .inv-table td {
+      padding: 7px 10px;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+    }
+
+    .inv-totals-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      gap: 20px;
+    }
+
+    .inv-payment-status {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 0.84rem;
+    }
+
+    .inv-calc-table {
+      width: 280px;
+      font-size: 0.86rem;
+    }
+
+    .inv-calc-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .inv-calc-row.grand {
+      border-top: 2px solid #1e3a8a;
+      border-bottom: none;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #1e3a8a;
+      padding-top: 6px;
+      margin-top: 4px;
+    }
+
+    .inv-warranty-box {
+      border-left: 3.5px solid #2563eb;
+      background: #f8fafc;
+      padding: 8px 12px;
+      font-size: 0.77rem;
+      color: #475569;
+      margin-bottom: 24px;
+    }
+
+    .inv-signatures {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      margin-top: 10px;
+    }
+
+    .inv-sig-block {
+      text-align: center;
+      width: 200px;
     }
 
     @media print {
       body * { visibility: hidden; }
       #printArea, #printArea * { visibility: visible; }
-      #printArea { position: absolute; left: 0; top: 0; width: 100%; }
+      #printArea { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; padding: 0; }
     }
   </style>
 </head>
@@ -677,8 +779,8 @@
       </div>
     </div>
     <div class="header-actions">
-      <button class="btn-icon" onclick="openApiKeyModal()" title="Gemini AI Ayarları">🔑 Gemini API</button>
-      <button class="btn-icon" onclick="showVehicleListModal()" title="Kayıtlı Araçlar">📋 Tüm Araçlar (<span id="headerVehicleCount">0</span>)</button>
+      <button class="btn-icon" onclick="openApiKeyModal()" title="Gemini AI Ayarı">🔑 Gemini API</button>
+      <button class="btn-icon" onclick="showVehicleListModal()" title="Kayıtlı Araçlar">📋 Araçlar (<span id="headerVehicleCount">0</span>)</button>
       <button class="btn-icon" onclick="exportData()" title="Yedek İndir">💾</button>
     </div>
   </header>
@@ -694,7 +796,7 @@
       <button class="ribbon-add-btn" onclick="resetFormForNewVehicle()">➕ Yeni Araç</button>
     </div>
 
-    <!-- AI CARD (GEMINI ASISTANI) -->
+    <!-- AI CARD (GEMINI ENTEGRASYONU) -->
     <section class="ai-card">
       <div class="ai-header">
         <div class="ai-title">
@@ -719,9 +821,6 @@
           </div>
         </div>
       </div>
-      <div class="ai-hint">
-        💡 <b>İpucu:</b> Dükkanda elleriniz işteyken mikrofona basıp konuşun; plaka, şanzıman arızası, parça listesi, yağ ve işçilik tutarları otomatik ayırt edilip forma işlenir.
-      </div>
     </section>
 
     <!-- NAVIGATION TABS -->
@@ -732,7 +831,7 @@
       </button>
       <button class="nav-btn" onclick="switchTab(2)" id="tabBtn2">
         <span class="tab-icon">🔧</span>
-        <span>2. Teşhis & Foto</span>
+        <span>2. Teşhis & Ses/Foto</span>
       </button>
       <button class="nav-btn" onclick="switchTab(3)" id="tabBtn3">
         <span class="tab-icon">📦</span>
@@ -740,7 +839,7 @@
       </button>
       <button class="nav-btn" onclick="switchTab(4)" id="tabBtn4">
         <span class="tab-icon">🏁</span>
-        <span>4. Durum & Fiş</span>
+        <span>4. Teslimat & Fiş</span>
       </button>
     </div>
 
@@ -762,7 +861,7 @@
             <input type="text" id="vModel" placeholder="Örn: Volkswagen Passat 1.6 TDI">
           </div>
           <div class="form-group">
-            <label>Müşteri Adı / Telefon</label>
+            <label>Müşteri Adı & Telefonu</label>
             <input type="text" id="vCustomer" placeholder="Örn: Ahmet Yılmaz - 0532 555 4433">
           </div>
           <div class="form-group">
@@ -770,7 +869,7 @@
             <input type="text" id="vKm" placeholder="Örn: 184.500">
           </div>
           <div class="form-group">
-            <label>Giriş Tarihi</label>
+            <label>Giriş / Kabul Tarihi</label>
             <input type="date" id="vEntryDate">
           </div>
           <div class="form-group">
@@ -798,7 +897,7 @@
       </div>
     </section>
 
-    <!-- TAB 2: TEŞHİS & FOTOĞRAFLAR -->
+    <!-- TAB 2: TEŞHİS & SES/FOTOĞRAFLAR -->
     <section id="tab2" class="tab-content" style="display: none;">
       <div class="card">
         <div class="card-header">
@@ -818,7 +917,7 @@
             <button class="chip-btn" onclick="setTransType('ZF 8HP45 / 8HP70 (BMW 8-İleri)')">ZF 8HP</button>
             <button class="chip-btn" onclick="setTransType('Mercedes 722.6 / 722.9 7G-Tronic')">Mercedes 7G</button>
             <button class="chip-btn" onclick="setTransType('Ford PowerShift (DPS6 / 6DCT250)')">PowerShift</button>
-            <button class="chip-btn" onclick="setTransType('Aisin TF-80SC / Warner 6-İleri')">Aisin 6-İleri</button>
+            <button class="chip-btn" onclick="setTransType('Aisin TF-80SC 6-İleri')">Aisin 6-İleri</button>
           </div>
         </div>
 
@@ -827,13 +926,34 @@
           <input type="text" id="vFaultCodes" placeholder="Örn: P17BF (Basınç Düşüklüğü), P0841, P0700">
         </div>
 
-        <div class="form-group" style="margin-bottom: 14px;">
+        <div class="form-group" style="margin-bottom: 16px;">
           <label>Usta Ekspertiz ve Muayene Notları</label>
-          <textarea id="vExpertiseNotes" rows="3" placeholder="Örn: Mekatronik alt gövdesinde basınç tüpü yuvasında çatlak tespit edildi. Pompa sürekli devrede kalıyor. Kavrama balatası aşınmış..."></textarea>
+          <textarea id="vExpertiseNotes" rows="3" placeholder="Örn: Mekatronik alt gövdesinde basınç tüpü yuvasında çatlak tespit edildi. Pompa sürekli devrede kalıyor. Çift kavrama balata kiti aşınmış..."></textarea>
+        </div>
+
+        <!-- 🎙️ SES KAYDI EKLEME BÖLÜMÜ -->
+        <div style="background: #0f172a; border: 1.5px solid #33496e; border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div style="font-weight: 800; font-size: 0.95rem; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
+              <span>🎙️ Araçla İlgili Ses Kayıtları (Arıza Sesi / Usta Sesli Notu)</span>
+            </div>
+            <span id="recordingTimer" style="display: none; color: #ef4444; font-weight: 800; font-size: 0.9rem;">● Kaydediyor: 00:00</span>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+            <input type="text" id="audioNoteTitle" placeholder="Ses kaydı başlığı (Örn: 3. vites uğultu sesi, müşteri onay kaydı)" style="flex: 1; min-width: 220px;">
+            <button class="btn btn-danger" id="btnRecordAudio" onclick="toggleAudioRecording()">
+              <span id="recordAudioIcon">🔴</span> <span id="recordAudioText">Ses Kaydı Başlat</span>
+            </button>
+          </div>
+
+          <div id="audioNotesList">
+            <!-- Audio memos list -->
+          </div>
         </div>
 
         <!-- Photo Upload -->
-        <div style="border: 2px dashed #2a3d5e; border-radius: 10px; padding: 16px; text-align: center; margin-bottom: 14px;">
+        <div style="border: 2px dashed #2a3d5e; border-radius: 10px; padding: 14px; text-align: center; margin-bottom: 14px;">
           <input type="file" id="photoFileInput" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)">
           <button class="btn btn-secondary" onclick="document.getElementById('photoFileInput').click()">
             📷 Fotoğraf Çek / Galeriden Yükle
@@ -860,12 +980,24 @@
           <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="addPartRow()">➕ Parça Satırı Ekle</button>
         </div>
 
+        <!-- ⚡ HIZLI LİSTE VE SESLE PARÇA EKLEME -->
+        <div style="background: #0f172a; border: 1px solid #2a3d5e; border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+          <div style="font-weight: 700; font-size: 0.86rem; color: #38bdf8; margin-bottom: 6px;">⚡ Hızlı Parça / Liste Ekle (Sesle veya Yapıştırarak):</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="text" id="quickPartsInput" placeholder="Örn: Takım conta 8500, balata takımı 12000, filtre 2500, türbin revizyonu 17000" style="flex: 1; min-width: 250px;">
+            <button class="btn btn-danger" onclick="voiceInputToQuickParts()" title="Sesle parça söyle">🎤</button>
+            <button class="btn btn-success" onclick="parseQuickPartsInput()">Listeye Ekle ➔</button>
+          </div>
+          <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 4px;">Gemini'den kopyaladığınız listeyi yapıştırabilir veya sesle art arda parçaları fiyatlarıyla söyleyebilirsiniz.</div>
+        </div>
+
         <div class="chips-group">
-          <span style="font-size: 0.78rem; color: #94a3b8; align-self: center; margin-right: 4px;">Hızlı Ekle:</span>
+          <span style="font-size: 0.78rem; color: #94a3b8; align-self: center; margin-right: 4px;">Hazır Kalemler:</span>
           <button class="chip-btn" onclick="addPresetPart('Mekatronik Güçlendirilmiş Basınç Tüp Kiti', 7500)">Basınç Tüp Kiti (7.500 TL)</button>
           <button class="chip-btn" onclick="addPresetPart('Komple Çift Kavrama Balata Seti', 32000)">Çift Kavrama Seti (32.000 TL)</button>
           <button class="chip-btn" onclick="addPresetPart('Çıkma Revizyonlu Mekatronik Kartı', 24000)">Mekatronik Kartı (24.000 TL)</button>
-          <button class="chip-btn" onclick="addPresetPart('Mekatronik Hidrolik Beyin Conta & Filtre Kiti', 2800)">Conta/Filtre Kiti (2.800 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('Tork Konvertörü (Türbin) Revizyonu', 17000)">Türbin Revizyonu (17.000 TL)</button>
+          <button class="chip-btn" onclick="addPresetPart('Mekatronik Hidrolik Conta & Filtre Kiti', 2800)">Conta/Filtre Kiti (2.800 TL)</button>
           <button class="chip-btn" onclick="addPresetPart('MMT Debriyaj Aktüatör Motoru', 7500)">MMT Robot Motoru (7.500 TL)</button>
           <button class="chip-btn" onclick="addPresetPart('Şanzıman Yağ Soğutucusu (Eşanjör)', 6500)">Yağ Soğutucu (6.500 TL)</button>
         </div>
@@ -874,6 +1006,7 @@
           <table>
             <thead>
               <tr>
+                <th>No</th>
                 <th>Parça / İşlem Tanımı</th>
                 <th style="width: 70px;">Adet</th>
                 <th style="width: 120px;">Birim Fiyat (TL)</th>
@@ -891,21 +1024,21 @@
         <div class="form-grid" style="margin-top: 14px;">
           <div class="form-group">
             <label>Şanzıman Yağı Cinsi & Miktarı</label>
-            <input type="text" id="vOilSpec" placeholder="Örn: Castrol 75W Tam Sentetik (2 Litre)">
+            <input type="text" id="vOilSpec" placeholder="Örn: Ford Onaylı Tam Sentetik Şanzıman Yağı (7 Litre)">
           </div>
           <div class="form-group">
-            <label>Yağ Toplam Tutarı (TL)</label>
+            <label>Şanzıman Yağı Toplam Tutarı (TL)</label>
             <input type="number" id="vOilTotal" value="0" oninput="calculateTotals()">
           </div>
           <div class="form-group">
-            <label>Şanzıman Sökme-Takma & Revizyon İşçiliği (TL)</label>
+            <label>Sökme-Takma & Revizyon İşçiliği (TL)</label>
             <input type="number" id="vLaborFee" value="0" oninput="calculateTotals()">
           </div>
           <div class="form-group">
             <label>KDV & Fatura Durumu</label>
             <select id="vTaxOption" onchange="calculateTotals()">
-              <option value="nakit">Nakit / Havale (%0 KDV)</option>
-              <option value="kdv20">Kredi Kartı / Faturalı (+%20 KDV)</option>
+              <option value="nakit">Nakit / Havale / EFT (%0 KDV)</option>
+              <option value="kdv20">Kredi Kartı / Kurumsal Faturalı (+%20 KDV)</option>
             </select>
           </div>
         </div>
@@ -913,7 +1046,7 @@
         <!-- Summary -->
         <div class="summary-card">
           <div class="summary-row">
-            <span>Yedek Parça Toplamı:</span>
+            <span>Yedek Parça & Malzeme Toplamı:</span>
             <span id="sumPartsTotal">0,00 TL</span>
           </div>
           <div class="summary-row">
@@ -921,7 +1054,7 @@
             <span id="sumOilTotal">0,00 TL</span>
           </div>
           <div class="summary-row">
-            <span>İşçilik & Revizyon:</span>
+            <span>Revizyon & Montaj İşçiliği:</span>
             <span id="sumLaborTotal">0,00 TL</span>
           </div>
           <div class="summary-row" id="sumVatRow" style="display: none; color: #f59e0b;">
@@ -929,49 +1062,67 @@
             <span id="sumVatTotal">0,00 TL</span>
           </div>
           <div class="summary-row total">
-            <span>GENEL TOPLAM:</span>
+            <span>GENEL TOPLAM TUTAR:</span>
             <span id="sumGrandTotal">0,00 TL</span>
           </div>
         </div>
 
         <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
           <button type="button" class="btn btn-success" onclick="saveActiveVehicle(true)">💾 Değişiklikleri Kaydet</button>
-          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(4);">Servis Fişine Geç ➔</button>
+          <button type="button" class="btn" onclick="saveActiveVehicle(); switchTab(4);">Teslimat & Fişe Geç ➔</button>
         </div>
       </div>
     </section>
 
-    <!-- TAB 4: DURUM & SERVİS FİŞİ -->
+    <!-- TAB 4: TESLİMAT & RESMİ SERVİS FİŞİ -->
     <section id="tab4" class="tab-content" style="display: none;">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🏁 Servis Durumu ve Resmi Fiş Çıktısı</div>
+          <div class="card-title">🏁 Araç Teslimat, Tahsilat (Kasa) ve Fiş Çıktısı</div>
         </div>
 
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Araç Servis Aşaması</label>
-            <select id="vStatus" onchange="updateHeaderBadges(); saveActiveVehicle();">
-              <option value="0">🚗 Kabul Edildi (Giriş Yapıldı)</option>
-              <option value="1">⚙️ Şanzıman Söküldü / Dağıtıldı</option>
-              <option value="2">📦 Parça & Malzeme Bekleniyor</option>
-              <option value="3">🔧 Revizyon & Toplama Aşamasında</option>
-              <option value="4">🚦 Test Sürüşü ve Kalibrasyonda</option>
-              <option value="5">✅ Onarım Tamamlandı (Teslime Hazır)</option>
-              <option value="6">🤝 Müşteriye Teslim Edildi</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Teslim / Tamamlanma Tarihi</label>
-            <input type="date" id="vDeliveryDate">
-          </div>
-          <div class="form-group">
-            <label>Garanti Şartı & Kapsamı</label>
-            <input type="text" id="vWarranty" value="1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır">
-          </div>
-          <div class="form-group">
-            <label>Teslimat Notları / Tavsiyeler</label>
-            <input type="text" id="vDeliveryNotes" placeholder="Örn: 2000 KM sonra kontrol ve adaptasyon kontrolü önerilir.">
+        <!-- 💰 TESLİMAT VE ÖDEME (KASA) ALANI -->
+        <div style="background: #0f172a; border: 1.5px solid #2563eb; border-radius: 10px; padding: 16px; margin-bottom: 18px;">
+          <h4 style="color: #38bdf8; margin-bottom: 12px; font-size: 0.96rem;">💰 Kasa ve Tahsilat Durumu</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Servis Durumu</label>
+              <select id="vStatus" onchange="updateHeaderBadges(); saveActiveVehicle();">
+                <option value="0">🚗 Kabul Edildi (Giriş Yapıldı)</option>
+                <option value="1">⚙️ Şanzıman Söküldü / Dağıtıldı</option>
+                <option value="2">📦 Parça & Malzeme Bekleniyor</option>
+                <option value="3">🔧 Revizyon & Toplama Aşamasında</option>
+                <option value="4">🚦 Test Sürüşü ve Kalibrasyonda</option>
+                <option value="5">✅ Onarım Tamamlandı (Teslime Hazır)</option>
+                <option value="6">🤝 Müşteriye Teslim Edildi</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Teslim Edilen Tarih</label>
+              <input type="date" id="vDeliveryDate" onchange="updateOfficialSlip()">
+            </div>
+            <div class="form-group">
+              <label>Alınan / Tahsil Edilen Tutar (TL)</label>
+              <input type="number" id="vPaidAmount" value="0" placeholder="Örn: 50000" oninput="calculateBalance()">
+            </div>
+            <div class="form-group">
+              <label>Ödeme Yöntemi</label>
+              <select id="vPaymentMethod" onchange="updateOfficialSlip()">
+                <option value="Nakit">Nakit</option>
+                <option value="Havale / EFT">Havale / EFT</option>
+                <option value="Kredi Kartı / POS">Kredi Kartı (POS)</option>
+                <option value="Parçalı Ödeme">Parçalı (Nakit + Kart)</option>
+                <option value="Ödenmedi / Beklemede">Ödenmedi / Beklemede</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Kalan Bakiye / Borç (TL)</label>
+              <input type="text" id="vRemainingBalance" value="0,00 TL" readonly style="font-weight: 800; color: #38bdf8; background: #1e293b;">
+            </div>
+            <div class="form-group">
+              <label>Garanti Şartı</label>
+              <input type="text" id="vWarranty" value="6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır">
+            </div>
           </div>
         </div>
 
@@ -981,101 +1132,122 @@
             📲 WhatsApp İle Müşteriye Gönder
           </button>
           <button class="btn btn-secondary" style="flex: 1;" onclick="window.print()">
-            🖨️ Yazdır / PDF Kaydet
+            🖨️ Yazdır / Resmi PDF Kaydet
           </button>
           <button class="btn" onclick="saveActiveVehicle(true)">
             💾 Bilgileri Kaydet
           </button>
         </div>
 
-        <!-- Official Service Slip Print Preview -->
+        <!-- KURUMSAL RESMİ SERVİS FİŞİ (AKTİF OTOMATİK ŞANZIMAN) -->
         <div id="printArea" class="official-invoice">
-          <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 14px;">
+          <!-- Antet -->
+          <div class="inv-header">
             <div>
-              <h2 style="margin: 0; color: #0f172a; font-size: 1.25rem; font-weight: 900;">AKTİF OTOMATİK ŞANZIMAN</h2>
-              <div style="font-size: 0.85rem; color: #475569; margin-top: 3px;">Otomatik Şanzıman Tamir, Bakım & Revizyon Servisi</div>
-              <div style="font-size: 0.8rem; color: #64748b;">Akdeniz Sanayi Sitesi 5036 Sok. No:91 Kepez / ANTALYA</div>
-              <div style="font-size: 0.8rem; color: #64748b;">Tel: 0545 344 87 32 • Yetkili: Yusuf Yaşar Kaya (Baş Usta)</div>
+              <div class="inv-brand-name">AKTİF OTOMATİK ŞANZIMAN</div>
+              <div class="inv-brand-sub">Otomatik Şanzıman Tamir, Bakım & Revizyon Servisi</div>
+              <div class="inv-address">Akdeniz Sanayi Sitesi 5036 Sok. No:91 Kepez / ANTALYA</div>
+              <div class="inv-address">Tel: 0545 344 87 32 • Yetkili: Yusuf Yaşar Kaya (Baş Usta)</div>
             </div>
             <div style="text-align: right;">
-              <h3 style="margin: 0; color: #2563eb; font-size: 1.1rem;">SERVİS & ONARIM FİŞİ</h3>
-              <div style="font-size: 0.82rem; margin-top: 4px;"><b>Tarih:</b> <span id="slipDate">-</span></div>
-              <div style="font-size: 0.82rem;"><b>Plaka:</b> <span id="slipPlate" style="background:#f1f5f9; padding: 2px 6px; font-weight:900;">-</span></div>
+              <div class="inv-doc-title">İŞ EMRİ & SERVİS FİŞİ</div>
+              <div style="font-size: 0.8rem; margin-top: 4px;"><b>Belge No:</b> <span id="slipDocNo">AOS-2026-09</span></div>
+              <div style="font-size: 0.8rem;"><b>Tarih:</b> <span id="slipDate">-</span></div>
+              <div style="font-size: 0.8rem; margin-top: 2px;">
+                <b>Plaka:</b> <span id="slipPlate" style="background:#e2e8f0; padding: 2px 8px; font-weight:900; border: 1.5px solid #0f172a; border-radius: 4px;">-</span>
+              </div>
             </div>
           </div>
 
           <!-- Vehicle / Customer Info Grid -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #f8fafc; padding: 12px; border-radius: 6px; margin-bottom: 14px; font-size: 0.84rem;">
+          <div class="inv-meta-grid">
             <div>
-              <div><b>Araç:</b> <span id="slipModel">-</span></div>
-              <div><b>Müşteri:</b> <span id="slipCustomer">-</span></div>
+              <div><b>Araç Modeli:</b> <span id="slipModel">-</span></div>
+              <div><b>Müşteri / İletişim:</b> <span id="slipCustomer">-</span></div>
               <div><b>Kilometre:</b> <span id="slipKm">-</span></div>
+              <div><b>Giriş Tarihi:</b> <span id="slipEntryDate">-</span></div>
             </div>
             <div>
               <div><b>Şanzıman Tipi:</b> <span id="slipTrans">-</span></div>
-              <div><b>Arıza Şikayeti:</b> <span id="slipComplaint">-</span></div>
-              <div><b>Ekspertiz:</b> <span id="slipExpertise">-</span></div>
+              <div><b>Geliş Şikayeti:</b> <span id="slipComplaint">-</span></div>
+              <div><b>Usta Teşhisi:</b> <span id="slipExpertise">-</span></div>
+              <div><b>Teslim Tarihi:</b> <span id="slipDeliveryDate">-</span></div>
             </div>
           </div>
 
           <!-- Parts Table -->
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 0.82rem;">
+          <table class="inv-table">
             <thead>
-              <tr style="background: #e2e8f0; color: #0f172a; text-align: left;">
-                <th style="padding: 6px 8px;">No</th>
-                <th style="padding: 6px 8px;">Açıklama / Parça / İşlem</th>
-                <th style="padding: 6px 8px; text-align: center;">Miktar</th>
-                <th style="padding: 6px 8px; text-align: right;">Birim Fiyat</th>
-                <th style="padding: 6px 8px; text-align: right;">Tutar</th>
+              <tr>
+                <th style="width: 35px; text-align: center;">No</th>
+                <th>İşlem / Yedek Parça & Malzeme Açıklaması</th>
+                <th style="width: 60px; text-align: center;">Miktar</th>
+                <th style="width: 110px; text-align: right;">Birim Fiyat</th>
+                <th style="width: 110px; text-align: right;">Toplam Tutar</th>
               </tr>
             </thead>
             <tbody id="slipPartsTbody">
-              <!-- Injected dynamically -->
+              <!-- Dynamically populated -->
             </tbody>
           </table>
 
-          <!-- Totals -->
-          <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
-            <div style="width: 260px; font-size: 0.86rem;">
-              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
-                <span>Parça & Malzeme:</span>
-                <b id="slipSumParts">0 TL</b>
+          <!-- Totals and Payment Box -->
+          <div class="inv-totals-box">
+            <!-- Payment & Cash Register Info -->
+            <div class="inv-payment-status">
+              <div style="font-weight: 800; color: #1e3a8a; margin-bottom: 6px; font-size: 0.9rem;">💳 Tahsilat & Ödeme Bilgileri</div>
+              <div><b>Ödeme Yöntemi:</b> <span id="slipPayMethod">Nakit</span></div>
+              <div><b>Tahsil Edilen:</b> <b id="slipPaidAmount" style="color: #059669;">0,00 TL</b></div>
+              <div style="margin-top: 4px; padding-top: 4px; border-top: 1px dashed #cbd5e1;">
+                <b>Bakiye Durumu:</b> <span id="slipBalanceStatus" style="font-weight: 800; color: #2563eb;">Ödendi</span>
               </div>
-              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
+            </div>
+
+            <!-- Calculated Totals -->
+            <div class="inv-calc-table">
+              <div class="inv-calc-row">
+                <span>Yedek Parça & Malzeme:</span>
+                <b id="slipSumParts">0,00 TL</b>
+              </div>
+              <div class="inv-calc-row">
                 <span>Şanzıman Yağı:</span>
-                <b id="slipSumOil">0 TL</b>
+                <b id="slipSumOil">0,00 TL</b>
               </div>
-              <div style="display: flex; justify-content: space-between; padding: 3px 0;">
-                <span>Revizyon & İşçilik:</span>
-                <b id="slipSumLabor">0 TL</b>
+              <div class="inv-calc-row">
+                <span>Revizyon & Montaj İşçiliği:</span>
+                <b id="slipSumLabor">0,00 TL</b>
               </div>
-              <div id="slipSumVatRow" style="display: flex; justify-content: space-between; padding: 3px 0; color: #d97706;">
+              <div class="inv-calc-row" id="slipSumVatRow" style="display: none; color: #d97706;">
                 <span>%20 KDV:</span>
-                <b id="slipSumVat">0 TL</b>
+                <b id="slipSumVat">0,00 TL</b>
               </div>
-              <div style="display: flex; justify-content: space-between; padding: 6px 0; border-top: 2px solid #0f172a; font-size: 1.05rem; color: #1e3a8a;">
+              <div class="inv-calc-row grand">
                 <span>GENEL TOPLAM:</span>
-                <b id="slipGrandTotal">0 TL</b>
+                <b id="slipGrandTotal">0,00 TL</b>
               </div>
             </div>
           </div>
 
-          <!-- Signatures & Notes -->
-          <div style="font-size: 0.76rem; color: #64748b; line-height: 1.3; border-top: 1px dashed #cbd5e1; padding-top: 10px; margin-bottom: 20px;">
-            • <b>Garanti Şartı:</b> <span id="slipWarrantyText">1 Yıl / 20.000 KM garantilidir.</span><br>
-            • <b>Önemli Bilgilendirme:</b> Şanzıman revizyonlarında yağ seviyesi ve adaptasyon kontrolleri yapılmıştır. Müşterinin kendisinin temin ettiği parçaların arızalı çıkması durumunda oluşacak sökme-takma işçilikleri garanti dışıdır.
+          <!-- Warranty & Policy Box -->
+          <div class="inv-warranty-box">
+            • <b>Garanti Şartı:</b> <span id="slipWarrantyText">6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır.</span><br>
+            • <b>Önemli Servis & Montaj Notu:</b> Şanzıman montajı sonrasında onaylı yeni şanzıman yağı konulmuş, diagnostik cihaz ile şanzıman beyni (TCU) adaptasyon ve yol testleri yapılmıştır.<br>
+            • <b>Parça Uyarısı:</b> Müşteri tarafından dışarıdan temin edilen yedek parçaların arızalı veya uyumsuz çıkması durumunda oluşacak sökme-takma işçilik bedelleri müşteriye aittir.
           </div>
 
-          <div style="display: flex; justify-content: space-between; margin-top: 30px; font-size: 0.84rem;">
-            <div style="text-align: center; width: 200px;">
-              <div><b>Teslim Eden / Baş Usta</b></div>
-              <div style="margin-top: 5px;">Yusuf Yaşar Kaya</div>
-              <div style="font-size: 0.74rem; color: #64748b;">(Kaşe / İmza)</div>
+          <!-- Signatures -->
+          <div class="inv-signatures">
+            <div class="inv-sig-block">
+              <div><b>Teslim Eden / Yetkili Usta</b></div>
+              <div style="margin-top: 6px; font-weight: 700;">Yusuf Yaşar Kaya (Baş Usta)</div>
+              <div style="font-size: 0.74rem; color: #64748b; margin-top: 2px;">Aktif Otomatik Şanzıman Servisi</div>
+              <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 15px;">İmza / Kaşe: ............................</div>
             </div>
-            <div style="text-align: center; width: 200px;">
-              <div><b>Teslim Alan / Müşteri</b></div>
-              <div id="slipCustomerSignature" style="margin-top: 5px;">-</div>
-              <div style="font-size: 0.74rem; color: #64748b;">(İmza)</div>
+            <div class="inv-sig-block">
+              <div><b>Teslim Alan / Araç Sahibi</b></div>
+              <div id="slipCustomerSignature" style="margin-top: 6px; font-weight: 700;">-</div>
+              <div style="font-size: 0.74rem; color: #64748b; margin-top: 2px;">Aracı eksiksiz ve çalışır teslim aldım.</div>
+              <div style="font-size: 0.74rem; color: #94a3b8; margin-top: 15px;">İmza: ............................</div>
             </div>
           </div>
         </div>
@@ -1085,7 +1257,7 @@
 
   </div>
 
-  <!-- MODAL: KAYITLI ARAÇLAR LİSTESİ -->
+  <!-- MODAL: KAYITLI ARAÇLAR -->
   <div class="modal-overlay" id="vehicleListModal">
     <div class="modal-content">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
@@ -1105,7 +1277,7 @@
       </div>
 
       <div id="vehicleModalList" style="display: flex; flex-direction: column; gap: 10px;">
-        <!-- Vehicle cards rendered here -->
+        <!-- Vehicle cards -->
       </div>
     </div>
   </div>
@@ -1118,14 +1290,14 @@
         <button onclick="closeApiKeyModal()" style="background:none; border:none; color:#94a3b8; font-size: 1.6rem; cursor:pointer;">&times;</button>
       </div>
       <p style="font-size: 0.84rem; color: #cbd5e1; margin-bottom: 12px; line-height: 1.4;">
-        Uygulamanın mikrofondan konuştuğunuz sesleri ve serbest metinleri kusursuz şekilde anlayıp formu doldurması için Google AI Studio'dan alabileceğiniz ücretsiz Gemini API anahtarını buraya kaydedebilirsiniz:
+        Google AI Studio'dan aldığınız ücretsiz Gemini API anahtarını buraya kaydederek tüm sesleri ve serbest metinleri Gemini zekasıyla anında forma dönüştürebilirsiniz:
       </p>
       <div class="form-group" style="margin-bottom: 14px;">
         <label>Gemini API Key</label>
         <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy...">
       </div>
       <div style="font-size: 0.78rem; color: #38bdf8; margin-bottom: 16px;">
-        * Anahtar sadece sizin telefonunuzun yerel hafızasında güvenle saklanır, dışarıya aktarılmaz.
+        * Anahtar yalnızca sizin cihazınızın yerel hafızasında güvenle saklanır.
       </div>
       <div style="display: flex; justify-content: space-between; gap: 8px;">
         <button class="btn btn-secondary" onclick="closeApiKeyModal()">İptal</button>
@@ -1142,7 +1314,7 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    const DB_STORAGE_KEY = 'aktif_sanziman_db_v2';
+    const DB_STORAGE_KEY = 'aktif_sanziman_db_v3';
     const API_STORAGE_KEY = 'aktif_sanziman_gemini_key';
 
     const DEMO_VEHICLES = [
@@ -1154,11 +1326,12 @@
         km: '184500',
         entryDate: '2026-09-18',
         engineType: '1.6 TDI Dizel 120 HP',
-        complaint: 'Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites boşa atıyor, devir yükseliyor ve ekranda anahtar işareti çıkıyor.',
+        complaint: 'Araç ısınınca kalkışta ve 1-2 vites geçişlerinde şiddetli silkeleme yapıyor. Vites boşa atıyor, devir yükseliyor.',
         transType: 'DSG DQ200 7-İleri (0CW)',
         faultCodes: 'P17BF (Basınç Düşüklüğü), P0841',
         expertiseNotes: 'Mekatronik alt gövdesinde basınç tüpü yuvasında çatlak tespit edildi. Pompa sürekli devrede kalıyor. Çift kavrama balata kiti aşınmış.',
         photos: [],
+        audioNotes: [],
         parts: [
           { name: 'Mekatronik Güçlendirilmiş Basınç Tüp Kiti', code: '0AM-325-066-AE', qty: 1, unitPrice: 7500 },
           { name: 'Komple Çift Kavrama Seti (LUK Orijinal)', code: '602 0008 00', qty: 1, unitPrice: 32000 },
@@ -1169,37 +1342,12 @@
         oilTotal: 2500,
         laborFee: 15000,
         taxOption: 'nakit',
-        status: '3',
-        deliveryDate: '2026-09-22',
-        warranty: '1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır',
-        deliveryNotes: 'Mekatronik güçlendirildi, kavrama temel ayarı yapıldı.'
-      },
-      {
-        id: 'demo_2_accent',
-        plate: '34 ZH 5513',
-        model: 'Hyundai Accent Era 1.5 CRDi (2011)',
-        customer: 'Mehmet Demir - 0544 222 1100',
-        km: '245000',
-        entryDate: '2026-09-17',
-        engineType: '1.5 CRDi Dizel 110 HP',
-        complaint: 'Vites 2 ve 3 geçişlerinde kaydırma yapıyor, geri viteste vuruntu var.',
-        transType: 'A4CF1 / A4CF2 4-İleri Tork Konvertörlü Otomatik',
-        faultCodes: 'P0732, P0733 (Vites Oranı Yanlış)',
-        expertiseNotes: 'Ön kavrama tamburunda yanık balata ve aşınmış teflon segmanlar görüldü.',
-        photos: [],
-        parts: [
-          { name: 'A4CF1 Komple Balata & Conta Overhaul Kiti', code: 'A4CF1-OHK', qty: 1, unitPrice: 18500 },
-          { name: 'Tork Konvertörü (Türbin) Revizyonu', code: 'TURBIN-A4', qty: 1, unitPrice: 12000 },
-          { name: 'Şanzıman Filtresi ve Karter Contası', code: 'HYU-46321-23001', qty: 1, unitPrice: 1800 }
-        ],
-        oilSpec: 'Hyundai ATF SP-III Onaylı Tam Sentetik (7 Litre)',
-        oilTotal: 7000,
-        laborFee: 18000,
-        taxOption: 'nakit',
-        status: '4',
+        status: '5',
         deliveryDate: '2026-09-21',
-        warranty: '1 Yıl / 20.000 KM Servis Garantisi',
-        deliveryNotes: 'Revizyon tamamlandı, hidrolik basınç değerleri normal.'
+        paidAmount: 61000,
+        paymentMethod: 'Nakit',
+        warranty: '6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır',
+        deliveryNotes: 'Mekatronik güçlendirildi, kavrama temel ayarı yapıldı.'
       }
     ];
 
@@ -1207,6 +1355,12 @@
     let vehicleFilter = 'all';
     let recognition = null;
     let isListening = false;
+
+    // Audio Recorder State
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let recordStartTime = 0;
+    let recordTimerInterval = null;
 
     // Storage
     function getStorageVehicles() {
@@ -1274,6 +1428,7 @@
         faultCodes: '',
         expertiseNotes: '',
         photos: [],
+        audioNotes: [],
         parts: [],
         oilSpec: '',
         oilTotal: 0,
@@ -1281,7 +1436,9 @@
         taxOption: 'nakit',
         status: '0',
         deliveryDate: '',
-        warranty: '1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır',
+        paidAmount: 0,
+        paymentMethod: 'Nakit',
+        warranty: '6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır',
         deliveryNotes: '',
         updatedAt: new Date().toISOString()
       };
@@ -1369,10 +1526,13 @@
 
       document.getElementById('vStatus').value = v.status || '0';
       document.getElementById('vDeliveryDate').value = v.deliveryDate || '';
-      document.getElementById('vWarranty').value = v.warranty || '1 Yıl / 20.000 KM Servisimiz Garantisi Altındadır';
-      document.getElementById('vDeliveryNotes').value = v.deliveryNotes || '';
+      document.getElementById('vPaidAmount').value = v.paidAmount || 0;
+      document.getElementById('vPaymentMethod').value = v.paymentMethod || 'Nakit';
+      document.getElementById('vWarranty').value = v.warranty || '6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır';
 
+      renderAudioNotesList();
       calculateTotals();
+      calculateBalance();
       updateOfficialSlip();
     }
 
@@ -1426,11 +1586,13 @@
 
       currentVehicle.status = document.getElementById('vStatus').value;
       currentVehicle.deliveryDate = document.getElementById('vDeliveryDate').value;
+      currentVehicle.paidAmount = parseFloat(document.getElementById('vPaidAmount').value) || 0;
+      currentVehicle.paymentMethod = document.getElementById('vPaymentMethod').value;
       currentVehicle.warranty = document.getElementById('vWarranty').value.trim();
-      currentVehicle.deliveryNotes = document.getElementById('vDeliveryNotes').value.trim();
       currentVehicle.updatedAt = new Date().toISOString();
 
       dbPutVehicle(currentVehicle);
+      calculateBalance();
       updateOfficialSlip();
 
       if (showToastMsg) {
@@ -1451,7 +1613,9 @@
     function addPartRow(name = '', code = '', qty = 1, price = 0) {
       const tbody = document.getElementById('partsTableBody');
       const tr = document.createElement('tr');
+      const rowIndex = tbody.children.length + 1;
       tr.innerHTML = `
+        <td style="color:#94a3b8; font-size:0.8rem; text-align:center;">${rowIndex}</td>
         <td><input type="text" class="p-name" value="${name}" placeholder="Parça veya işlem tanımı"></td>
         <td><input type="number" class="p-qty" value="${qty}" min="1" oninput="calculateTotals()" style="text-align: center;"></td>
         <td><input type="number" class="p-price" value="${price}" min="0" oninput="calculateTotals()" style="text-align: right;"></td>
@@ -1472,6 +1636,63 @@
     function removePartRow(btn) {
       btn.closest('tr').remove();
       calculateTotals();
+    }
+
+    // ⚡ Quick Parts Input Parser
+    function voiceInputToQuickParts() {
+      if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        alert('Tarayıcınız ses tanımayı desteklemiyor.');
+        return;
+      }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const rec = new SpeechRecognition();
+      rec.lang = 'tr-TR';
+      rec.onresult = (e) => {
+        const text = e.results[0][0].transcript;
+        document.getElementById('quickPartsInput').value = text;
+        showToast('🎙️ Parça listesi dinlendi');
+      };
+      rec.start();
+    }
+
+    function parseQuickPartsInput() {
+      const input = document.getElementById('quickPartsInput').value.trim();
+      if (!input) return;
+
+      // Split by commas, 've', or semicolons
+      const items = input.split(/[,;\n]|(?:\s+ve\s+)/i);
+      let addedCount = 0;
+
+      items.forEach(item => {
+        const text = item.trim();
+        if (!text) return;
+
+        // Try extracting price (e.g. 'takım conta 8500', 'türbin 17 bin')
+        let price = 0;
+        let name = text;
+
+        const binMatch = text.match(/(\d+)\s*(?:bin|bin\s*tl)/i);
+        if (binMatch) {
+          price = parseInt(binMatch[1]) * 1000;
+          name = text.replace(binMatch[0], '').trim();
+        } else {
+          const numMatch = text.match(/(\d{3,7})/);
+          if (numMatch) {
+            price = parseFloat(numMatch[1]);
+            name = text.replace(numMatch[0], '').replace(/tl|lira/ig, '').trim();
+          }
+        }
+
+        name = name.replace(/^[-•*]\s*/, '').trim();
+        if (name) {
+          addPartRow(name, '', 1, price);
+          addedCount++;
+        }
+      });
+
+      document.getElementById('quickPartsInput').value = '';
+      calculateTotals();
+      showToast(`✅ ${addedCount} parça tabloya eklendi`);
     }
 
     function calculateTotals() {
@@ -1507,25 +1728,162 @@
       document.getElementById('sumLaborTotal').innerText = formatMoney(laborTotal);
       document.getElementById('sumGrandTotal').innerText = formatMoney(grandTotal);
 
+      calculateBalance();
       return { partsTotal, oilTotal, laborTotal, vat, grandTotal };
+    }
+
+    function calculateBalance() {
+      const totals = calculateTotals();
+      const paid = parseFloat(document.getElementById('vPaidAmount').value) || 0;
+      const remaining = totals.grandTotal - paid;
+      const balEl = document.getElementById('vRemainingBalance');
+
+      if (remaining <= 0 && totals.grandTotal > 0) {
+        balEl.value = '0,00 TL (Tamamı Ödendi)';
+        balEl.style.color = '#10b981';
+      } else if (remaining > 0) {
+        balEl.value = formatMoney(remaining) + ' (Kalan Borç)';
+        balEl.style.color = '#ef4444';
+      } else {
+        balEl.value = '0,00 TL';
+        balEl.style.color = '#38bdf8';
+      }
     }
 
     function formatMoney(num) {
       return Number(num).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' TL';
     }
 
-    // Official Service Slip Renderer
+    // 🎙️ AUDIO RECORDING ENGINE (MediaRecorder API)
+    async function toggleAudioRecording() {
+      const btn = document.getElementById('btnRecordAudio');
+      const icon = document.getElementById('recordAudioIcon');
+      const text = document.getElementById('recordAudioText');
+      const timer = document.getElementById('recordingTimer');
+
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        clearInterval(recordTimerInterval);
+        timer.style.display = 'none';
+        btn.className = 'btn btn-danger';
+        icon.innerText = '🔴';
+        text.innerText = 'Ses Kaydı Başlat';
+        return;
+      }
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert('Cihazınızda mikrofon kaydı desteklenmiyor.');
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) audioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(audioChunks, { type: 'audio/mp4' });
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            const base64Audio = reader.result;
+            const titleInput = document.getElementById('audioNoteTitle');
+            const noteTitle = titleInput.value.trim() || 'Sesli Not (' + new Date().toLocaleTimeString('tr-TR') + ')';
+
+            if (!currentVehicle.audioNotes) currentVehicle.audioNotes = [];
+            currentVehicle.audioNotes.push({
+              id: 'aud_' + Date.now(),
+              title: noteTitle,
+              date: new Date().toLocaleString('tr-TR'),
+              dataUrl: base64Audio
+            });
+
+            titleInput.value = '';
+            saveActiveVehicle(false);
+            renderAudioNotesList();
+            showToast('🎙️ Ses kaydı araca eklendi');
+          };
+          stream.getTracks().forEach(track => track.stop());
+        };
+
+        mediaRecorder.start();
+        btn.className = 'btn btn-danger listening';
+        icon.innerText = '⏹️';
+        text.innerText = 'Kaydı Durdur';
+        timer.style.display = 'inline';
+        recordStartTime = Date.now();
+
+        recordTimerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - recordStartTime) / 1000);
+          const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+          const s = String(elapsed % 60).padStart(2, '0');
+          timer.innerText = `● Kaydediyor: ${m}:${s}`;
+        }, 500);
+
+      } catch (err) {
+        console.error('Mikrofon erişim hatası:', err);
+        alert('Mikrofon izni verilmedi veya erişilemedi.');
+      }
+    }
+
+    function renderAudioNotesList() {
+      const container = document.getElementById('audioNotesList');
+      container.innerHTML = '';
+
+      if (!currentVehicle || !currentVehicle.audioNotes || currentVehicle.audioNotes.length === 0) {
+        container.innerHTML = '<div style="font-size: 0.78rem; color: #64748b; padding: 4px 0;">Henüz ses kaydı eklenmedi.</div>';
+        return;
+      }
+
+      currentVehicle.audioNotes.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'audio-card';
+        card.innerHTML = `
+          <div style="flex: 1;">
+            <div style="font-weight: 700; font-size: 0.84rem; color: #fff;">${item.title}</div>
+            <div style="font-size: 0.72rem; color: #94a3b8;">${item.date}</div>
+            <audio controls src="${item.dataUrl}" style="width: 100%; margin-top: 6px;"></audio>
+          </div>
+          <button style="background:none; border:none; color:#ef4444; font-size:1.1rem; cursor:pointer;" onclick="deleteAudioNote(${idx})">🗑️</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function deleteAudioNote(idx) {
+      if (confirm('Bu ses kaydını silmek istiyor musunuz?')) {
+        currentVehicle.audioNotes.splice(idx, 1);
+        saveActiveVehicle(false);
+        renderAudioNotesList();
+        showToast('🗑️ Ses kaydı silindi');
+      }
+    }
+
+    // KURUMSAL RESMİ SERVİS FİŞİ GÜNCELLEME
     function updateOfficialSlip() {
       if (!currentVehicle) return;
-      document.getElementById('slipDate').innerText = document.getElementById('vEntryDate').value || new Date().toLocaleDateString('tr-TR');
-      document.getElementById('slipPlate').innerText = document.getElementById('vPlate').value.trim().toUpperCase() || 'PLAKASIZ';
+
+      const plate = document.getElementById('vPlate').value.trim().toUpperCase() || 'PLAKASIZ';
+      const cleanPlate = plate.replace(/\s+/g, '');
+      const docNo = 'AOS-' + new Date().getFullYear() + '-' + cleanPlate;
+
+      document.getElementById('slipDocNo').innerText = docNo;
+      document.getElementById('slipDate').innerText = document.getElementById('vDeliveryDate').value || document.getElementById('vEntryDate').value || new Date().toLocaleDateString('tr-TR');
+      document.getElementById('slipPlate').innerText = plate;
       document.getElementById('slipModel').innerText = document.getElementById('vModel').value.trim() || '-';
       document.getElementById('slipCustomer').innerText = document.getElementById('vCustomer').value.trim() || '-';
       document.getElementById('slipKm').innerText = document.getElementById('vKm').value.trim() ? document.getElementById('vKm').value + ' KM' : '-';
-      document.getElementById('slipTrans').innerText = document.getElementById('vTransType').value.trim() || '-';
+      document.getElementById('slipEntryDate').innerText = document.getElementById('vEntryDate').value || '-';
+      document.getElementById('slipDeliveryDate').innerText = document.getElementById('vDeliveryDate').value || 'Teslim Aşamasında';
+      document.getElementById('slipTrans').innerText = document.getElementById('vTransType').value.trim() || 'Otomatik Şanzıman';
       document.getElementById('slipComplaint').innerText = document.getElementById('vComplaint').value.trim() || '-';
-      document.getElementById('slipExpertise').innerText = document.getElementById('vExpertiseNotes').value.trim() || '-';
+      document.getElementById('slipExpertise').innerText = document.getElementById('vExpertiseNotes').value.trim() || 'Komple Revizyon & Kalibrasyon';
 
+      // Table rows
       const partsTbody = document.getElementById('slipPartsTbody');
       partsTbody.innerHTML = '';
       let rowNum = 1;
@@ -1538,11 +1896,11 @@
         if (name || price > 0) {
           const ptr = document.createElement('tr');
           ptr.innerHTML = `
-            <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0;">${rowNum++}</td>
-            <td style="padding: 6px 8px; border-bottom: 1px solid #e2e8f0;">${name || 'Yedek Parça'}</td>
-            <td style="padding: 6px 8px; text-align: center; border-bottom: 1px solid #e2e8f0;">${qty}</td>
-            <td style="padding: 6px 8px; text-align: right; border-bottom: 1px solid #e2e8f0;">${formatMoney(price)}</td>
-            <td style="padding: 6px 8px; text-align: right; border-bottom: 1px solid #e2e8f0;">${formatMoney(qty * price)}</td>
+            <td style="text-align: center;">${rowNum++}</td>
+            <td><b>${name || 'Yedek Parça'}</b></td>
+            <td style="text-align: center;">${qty} Adet</td>
+            <td style="text-align: right;">${formatMoney(price)}</td>
+            <td style="text-align: right; font-weight: 700;">${formatMoney(qty * price)}</td>
           `;
           partsTbody.appendChild(ptr);
         }
@@ -1551,16 +1909,39 @@
       const totals = calculateTotals();
       document.getElementById('slipSumParts').innerText = formatMoney(totals.partsTotal);
       document.getElementById('slipSumOil').innerText = formatMoney(totals.oilTotal);
-      document.getElementById('slipSumLabor').innerText = formatMoney(totals.laborTotal);
+      document.getElementById('slipSumLabor').innerText = formatMoney(totals.laborFee || totals.laborTotal);
+
       if (totals.vat > 0) {
         document.getElementById('slipSumVatRow').style.display = 'flex';
         document.getElementById('slipSumVat').innerText = formatMoney(totals.vat);
       } else {
         document.getElementById('slipSumVatRow').style.display = 'none';
       }
+
       document.getElementById('slipGrandTotal').innerText = formatMoney(totals.grandTotal);
-      document.getElementById('slipWarrantyText').innerText = document.getElementById('vWarranty').value || '1 Yıl Garantili';
-      document.getElementById('slipCustomerSignature').innerText = document.getElementById('vCustomer').value || 'Müşteri';
+
+      // Payment Box in Slip
+      const paid = parseFloat(document.getElementById('vPaidAmount').value) || 0;
+      const method = document.getElementById('vPaymentMethod').value;
+      const remaining = totals.grandTotal - paid;
+
+      document.getElementById('slipPayMethod').innerText = method;
+      document.getElementById('slipPaidAmount').innerText = formatMoney(paid);
+
+      const balStatus = document.getElementById('slipBalanceStatus');
+      if (remaining <= 0 && totals.grandTotal > 0) {
+        balStatus.innerText = '✅ Tamamı Tahsil Edildi (Borç Yok)';
+        balStatus.style.color = '#059669';
+      } else if (remaining > 0) {
+        balStatus.innerText = `⚠️ Kalan Borç: ${formatMoney(remaining)}`;
+        balStatus.style.color = '#dc2626';
+      } else {
+        balStatus.innerText = 'Beklemede';
+        balStatus.style.color = '#2563eb';
+      }
+
+      document.getElementById('slipWarrantyText').innerText = document.getElementById('vWarranty').value || '6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır.';
+      document.getElementById('slipCustomerSignature').innerText = document.getElementById('vCustomer').value || 'Araç Sahibi';
     }
 
     // WhatsApp Export
@@ -1571,12 +1952,17 @@
       const model = document.getElementById('vModel').value || '';
       const complaint = document.getElementById('vComplaint').value || '';
       const trans = document.getElementById('vTransType').value || '';
+      const paid = parseFloat(document.getElementById('vPaidAmount').value) || 0;
+      const method = document.getElementById('vPaymentMethod').value;
+      const remaining = totals.grandTotal - paid;
 
       let text = `*AKTİF OTOMATİK ŞANZIMAN SERVİSİ*\n`;
-      text += `*Araç:* ${plate} - ${model}\n`;
-      if (trans) text += `*Şanzıman:* ${trans}\n`;
+      text += `*İŞ EMRİ & SERVİS FİŞİ*\n`;
+      text += `*Tarih:* ${document.getElementById('vDeliveryDate').value || document.getElementById('vEntryDate').value}\n`;
+      text += `*Araç:* ${plate} • ${model}\n`;
+      if (trans) text += `*Şanzıman Tipi:* ${trans}\n`;
       if (complaint) text += `*Şikayet:* ${complaint}\n\n`;
-      text += `*YAPILAN İŞLEMLER VE PARÇALAR:*\n`;
+      text += `*DEĞİŞEN PARÇALAR VE İŞLEMLER:*\n`;
 
       const rows = document.querySelectorAll('#partsTableBody tr');
       rows.forEach(tr => {
@@ -1587,20 +1973,24 @@
       });
 
       text += `• Şanzıman Yağı: ${formatMoney(totals.oilTotal)}\n`;
-      text += `• Revizyon & Montaj İşçiliği: ${formatMoney(totals.laborTotal)}\n`;
-      if (totals.vat > 0) text += `• %20 KDV: ${formatMoney(totals.vat)}\n`;
-      text += `\n*GENEL TOPLAM: ${formatMoney(totals.grandTotal)}*\n`;
-      text += `*Garanti:* 1 Yıl / 20.000 KM Servis Garantili\n`;
-      text += `*Yetkili:* Yusuf Yaşar Kaya (Baş Usta) - 0545 344 87 32\n`;
+      text += `• Revizyon & Montaj İşçiliği: ${formatMoney(totals.laborFee || totals.laborTotal)}\n`;
+      if (totals.vat > 0) text += `• %20 KDV Tutarı: ${formatMoney(totals.vat)}\n`;
+      text += `\n*GENEL TOPLAM TUTAR: ${formatMoney(totals.grandTotal)}*\n`;
+      text += `*Tahsil Edilen:* ${formatMoney(paid)} (${method})\n`;
+      if (remaining > 0) {
+        text += `*Kalan Bakiye:* ${formatMoney(remaining)}\n`;
+      } else {
+        text += `*Bakiye:* Tamamı Ödendi ✅\n`;
+      }
+      text += `\n*Garanti:* 6 Ay Sınırsız Kilometre Servisimiz Garantisi Altındadır.\n`;
+      text += `*Yetkili / Usta:* Yusuf Yaşar Kaya (Baş Usta) - 0545 344 87 32\n`;
       text += `Akdeniz Sanayi Sitesi, Kepez / ANTALYA`;
 
       const url = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
       window.open(url, '_blank');
     }
 
-    // -------------------------------------------------------------
-    // GEMINI AI INTEGRATION & SMART NLP PARSER
-    // -------------------------------------------------------------
+    // GEMINI AI INTEGRATION & NLP
     function toggleAiVoice() {
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
         alert('Tarayıcınız ses tanımayı desteklemiyor. Metin kutusuna yazarak da kullanabilirsiniz.');
@@ -1668,7 +2058,6 @@
         }
       }
 
-      // Fallback: Advanced Built-in NLP Transmission Rule Engine
       const localResult = parseLocallyWithTransmissionKnowledge(text);
       applyAiDataToVehicle(localResult);
     }
@@ -1696,9 +2085,9 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
   "taxOption": "nakit",
   "status": "1"
 }
-Önemli Kurallar:
-- SADECE geçerli bir JSON nesnesi döndür. Kod bloğu veya markdown backtick (üç tırnak veya kod bloğu) KULLANMA.
-- Parça ve işçilik fiyatları metinde 'bin' veya 'bin tl' geçiyorsa 1000 ile çarp (örn: 20 bin -> 20000, 100 bin -> 100000, 6 bin 500 -> 6500).`;
+Kurallar:
+- SADECE geçerli bir JSON nesnesi döndür. Üç tırnak veya kod bloğu KULLANMA.
+- Fiyatlar metinde bin olarak geçiyorsa 1000 ile çarp (örn: 20 bin -> 20000, 100 bin -> 100000).`;
 
       const body = {
         contents: [
@@ -1714,7 +2103,7 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
         body: JSON.stringify(body)
       });
 
-      if (!res.ok) throw new Error('API request failed: ' + res.status);
+      if (!res.ok) throw new Error('API failed: ' + res.status);
       const data = await res.json();
       const rawAnswer = data.candidates?.[0]?.content?.parts?.[0]?.text;
       if (!rawAnswer) return null;
@@ -1742,13 +2131,9 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
         status: '1'
       };
 
-      // 1. Plaka
       const plateMatch = text.match(/\b(0[1-9]|[1-7][0-9]|8[0-1])\s*([a-zA-Z]{1,3})\s*([0-9]{2,4})\b/i);
-      if (plateMatch) {
-        res.plate = (plateMatch[1] + ' ' + plateMatch[2] + ' ' + plateMatch[3]).toUpperCase();
-      }
+      if (plateMatch) res.plate = (plateMatch[1] + ' ' + plateMatch[2] + ' ' + plateMatch[3]).toUpperCase();
 
-      // 2. Model
       const models = ['Focus', 'Passat', 'Golf', 'Corolla', 'Civic', 'Accent', 'Era', 'Qashqai', 'Megane', 'Clio', 'Astra', 'Insignia', 'BMW', 'Mercedes', 'Audi'];
       for (const m of models) {
         if (new RegExp(m, 'i').test(text)) {
@@ -1757,7 +2142,6 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
         }
       }
 
-      // 3. Şanzıman Tipi
       if (/dq200|kuru çift kavrama|0cw|0am/i.test(text)) res.transType = 'DSG DQ200 7-İleri (0CW)';
       else if (/dq250|02e/i.test(text)) res.transType = 'DSG DQ250 6-İleri Islak Kavrama';
       else if (/mmt|multimode/i.test(text)) res.transType = 'Toyota MMT Robotize Şanzıman';
@@ -1767,30 +2151,18 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
       else if (/8hp/i.test(text)) res.transType = 'ZF 8HP 8-İleri';
       else if (/powershift/i.test(text)) res.transType = 'Ford PowerShift 6DCT250';
 
-      // 4. Parçalar & Fiyatlar
-      if (/ithal revizyonlu şanzıman|komple şanzıman/i.test(text)) {
-        res.parts.push({ name: 'Komple İthal Revizyonlu Şanzıman', qty: 1, unitPrice: 100000 });
-      }
-      if (/soğutucu|eşanjör/i.test(text)) {
-        res.parts.push({ name: 'Şanzıman Yağ Soğutucusu (Eşanjör)', qty: 1, unitPrice: 6500 });
-      }
-      if (/mekatronik|kart/i.test(text)) {
-        res.parts.push({ name: 'Çıkma Revizyonlu Mekatronik Kartı', qty: 1, unitPrice: 24000 });
-      }
-      if (/kavrama|baskı balata/i.test(text)) {
-        res.parts.push({ name: 'Komple Çift Kavrama Balata Kiti', qty: 1, unitPrice: 32000 });
-      }
-      if (/basınç tüp/i.test(text)) {
-        res.parts.push({ name: 'Güçlendirilmiş Mekatronik Basınç Tüp Kiti', qty: 1, unitPrice: 7500 });
-      }
+      if (/ithal revizyonlu şanzıman|komple şanzıman/i.test(text)) res.parts.push({ name: 'Komple İthal Revizyonlu Şanzıman', qty: 1, unitPrice: 100000 });
+      if (/soğutucu|eşanjör/i.test(text)) res.parts.push({ name: 'Şanzıman Yağ Soğutucusu (Eşanjör)', qty: 1, unitPrice: 6500 });
+      if (/mekatronik|kart/i.test(text)) res.parts.push({ name: 'Çıkma Revizyonlu Mekatronik Kartı', qty: 1, unitPrice: 24000 });
+      if (/kavrama|baskı balata/i.test(text)) res.parts.push({ name: 'Komple Çift Kavrama Balata Kiti', qty: 1, unitPrice: 32000 });
+      if (/basınç tüp/i.test(text)) res.parts.push({ name: 'Güçlendirilmiş Mekatronik Basınç Tüp Kiti', qty: 1, unitPrice: 7500 });
+      if (/türbin/i.test(text)) res.parts.push({ name: 'Tork Konvertörü (Türbin) Revizyonu', qty: 1, unitPrice: 17000 });
 
-      // Yağ
       if (/yağ/i.test(text)) {
         res.oilSpec = 'Şanzıman Yağı (Tam Sentetik Onaylı)';
         res.oilTotal = /mercedes/i.test(text) ? 8400 : 7000;
       }
 
-      // İşçilik
       if (/20 bin/i.test(text)) res.laborFee = 20000;
       else if (/15 bin/i.test(text)) res.laborFee = 15000;
       else if (/10 bin/i.test(text)) res.laborFee = 10000;
@@ -1832,9 +2204,7 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
       showToast('✅ Gemini AI verileri başarıyla doldurdu!');
     }
 
-    // -------------------------------------------------------------
     // MODALS & HELPERS
-    // -------------------------------------------------------------
     function openApiKeyModal() {
       const saved = localStorage.getItem(API_STORAGE_KEY) || '';
       document.getElementById('geminiApiKeyInput').value = saved;
@@ -1941,7 +2311,6 @@ Kullanıcının Türkçe konuşmasından veya metninden şu alanları tespit edi
       setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    // Export & Import
     function exportData() {
       const list = getStorageVehicles();
       const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
